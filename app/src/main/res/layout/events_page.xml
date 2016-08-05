@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app1="http://schemas.android.com/apk/res-auto"
+
+    tools:context="com.example.tarun.thomso2k16.EventsPage">
+    <com.astuetz.PagerSlidingTabStrip
+        android:id="@+id/events_days_tabs"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        app1:pstsShouldExpand="true"
+        app1:pstsTabTextAllCaps="true"/>
+    <android.support.v4.view.ViewPager
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:id="@+id/event_daywise_tabs">
+
+    </android.support.v4.view.ViewPager>
+
+</RelativeLayout>
