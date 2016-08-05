@@ -40,6 +40,7 @@ public class SplashPage extends AppCompatActivity {
                 //CLEAR IMAGE CACHE FROM PHONE SD CARD
                // FileCache aa=new FileCache(SplashPage.this);
                 //aa.clear();
+                context.deleteDatabase("THOMSO.db");
                 Events_pojo event = new Events_pojo();
                 event.setEventName("Name1");
                 event.setEventDescription("Description1");
