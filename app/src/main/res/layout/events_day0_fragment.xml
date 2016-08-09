@@ -4,15 +4,13 @@
     android:layout_height="match_parent"
     tools:context=".EventsDay0">
 
-<TextView
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:layout_marginTop="60dp"
-    android:text="Day 0................."/>
+
     <ListView
+        android:id="@+id/evens_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/evens_list"></ListView>
+        android:layout_below="@+id/tv_day0"/>
+
 
 
 </FrameLayout>
