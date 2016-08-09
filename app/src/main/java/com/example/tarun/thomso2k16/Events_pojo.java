@@ -4,7 +4,7 @@ package com.example.tarun.thomso2k16;
  * Created by tarun on 05-08-2016.
  */
 public class Events_pojo {
-    private String EventName, EventDescription,EventVenue,EventDate,EventTime;
+    private String EventName, EventDescription,EventVenue,EventDate,EventTime,EventDay;
     public void setEventName(String EventName){
         this.EventName= EventName;
     }
@@ -34,5 +34,11 @@ public class Events_pojo {
     }
     public String getEventTime(){
         return EventTime;
+    }
+    public void setEventDay(String EventDay){
+        this.EventDay=EventDay;
+    }
+    public String getEventDay(){
+        return EventDay;
     }
 }

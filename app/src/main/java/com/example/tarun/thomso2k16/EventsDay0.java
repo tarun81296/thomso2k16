@@ -27,6 +27,8 @@ public class EventsDay0 extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
+    private static final String COLUMN_EventDay="EventDay";
+    private static final String TABLE_EVENTS = "EVENT_DETAILS";
     public DBhelper dbh;
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -67,7 +69,7 @@ public class EventsDay0 extends Fragment {
         CheckInternetConnection cic= new CheckInternetConnection(context);
         eventslist= (ListView)rootView.findViewById(R.id.evens_list);
         dbh= new DBhelper(context,null,null,1);
-        List<Events_pojo> event = dbh.showEvents();
+        List<Events_pojo> event = dbh.showEvents("SELECT * FROM " + TABLE_EVENTS + " WHERE "+COLUMN_EventDay+" ='0' "+" ;");
         int n = dbh.getEventsCount();
         String[] tar = new String[n];
         Log.e("debug","debug 1");
@@ -80,13 +82,6 @@ public class EventsDay0 extends Fragment {
         }
         eventsAdapter= new ArrayAdapter<String>(context,android.R.layout.simple_list_item_1,tar);
         eventslist.setAdapter(eventsAdapter);
-        isInternetPresent= cic.isConnectingToInternet();
-        if(isInternetPresent){
-
-        }
-        else{
-
-        }
     return rootView;
     }
 

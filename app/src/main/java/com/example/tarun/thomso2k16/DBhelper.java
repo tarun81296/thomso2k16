@@ -22,6 +22,7 @@ public class DBhelper extends SQLiteOpenHelper {
     private static final String COLUMN_EventTime="EventTime";
     private static final String COLUMN_EventDate="EventDate";
     private static final String COLUMN_EventVenue="EventVenue";
+    private static final String COLUMN_EventDay="EventDay";
     public DBhelper(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
         super(context, DATABASE_NAME, factory, DATABASE_VERSION);
     }
@@ -29,8 +30,8 @@ public class DBhelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         String query= "CREATE TABLE " + TABLE_EVENTS + "( " +COLUMN_id+" INTEGER PRIMARY KEY AUTOINCREMENT,"+ COLUMN_EventName + " TEXT,"
-                + COLUMN_EventDescription + " TEXT,"+ COLUMN_EventDate + " TEXT," + COLUMN_EventTime + " TEXT," + COLUMN_EventVenue + " TEXT "
-                + ");";
+                + COLUMN_EventDescription + " TEXT,"+ COLUMN_EventDate + " TEXT," + COLUMN_EventTime + " TEXT," + COLUMN_EventVenue + " TEXT,"
+                + COLUMN_EventDay + " TEXT " + ");";
         db.execSQL(query);
     }
 
@@ -46,6 +47,7 @@ public class DBhelper extends SQLiteOpenHelper {
         values.put (COLUMN_EventDate,text.getEventDate());
         values.put (COLUMN_EventTime,text.getEventTime());
         values.put (COLUMN_EventVenue,text.getEventVenue());
+        values.put(COLUMN_EventDay,text.getEventDay());
         SQLiteDatabase db = getWritableDatabase();
         db.insert(TABLE_EVENTS, null, values);
         db.close();
@@ -57,9 +59,10 @@ public class DBhelper extends SQLiteOpenHelper {
         // return count
         return cursor.getCount();
     }
-    public List<Events_pojo> showEvents(){
+    public List<Events_pojo> showEvents(String query){
         List<Events_pojo> events=new ArrayList<Events_pojo>();
-        String selectQuery = "SELECT * FROM " + TABLE_EVENTS + " ;";
+        String selectQuery = query;
+        // "SELECT * FROM " + TABLE_EVENTS + " ;"
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);
         cursor.moveToFirst();

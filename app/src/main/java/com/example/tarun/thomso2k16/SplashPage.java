@@ -134,6 +134,7 @@ public class SplashPage extends AppCompatActivity {
                             event.setEventDate(object.getString("Date"));
                             event.setEventTime(object.getString("Time"));
                             event.setEventVenue(object.getString("Venue"));
+                            event.setEventDay(object.getString("Day"));
                             dbh.getInput(event);
                         }
                     }
