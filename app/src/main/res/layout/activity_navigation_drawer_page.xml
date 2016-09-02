@@ -2,7 +2,8 @@
     android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#ECECEC">
+
+    android:background="#1c1c1c">
 
     <!-- Side navigation drawer UI -->
 
@@ -16,127 +17,26 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_gravity="left|start"
-        android:background="#ECECEC">
-
+        android:background="#1c1c1c">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:id="@+id/nav_drawer_header_relativelayout"
+            android:layout_height="wrap_content">
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/nav_drawer_header_background"/>
+        </RelativeLayout>
         <ListView
             android:id="@+id/navList"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_gravity="left|start"
+            android:layout_below="@+id/nav_drawer_header_relativelayout"
             android:choiceMode="singleChoice"
             android:divider="#ECECEC"
             android:dividerHeight="1px"
             android:scrollbars="none" />
-
-        <!--
-                <RelativeLayout
-                    android:id="@+id/drawer_members_layout"
-                    android:layout_width="fill_parent"
-                    android:layout_height="65dp"
-                    android:layout_alignParentBottom="true"
-                    android:background="#ECECEC">
-
-                    <View
-                        android:layout_width="fill_parent"
-                        android:layout_height="2px"
-                        android:layout_alignParentLeft="true"
-                        android:layout_alignParentTop="true"
-                        android:background="#cdcdcd" />
-
-                    <ImageView
-                        android:id="@+id/drawer_membersicon"
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
-                        android:layout_alignParentLeft="true"
-                        android:layout_centerVertical="true"
-                        android:layout_marginLeft="15dp"
-                        android:src="@drawable/ic_group_black_24dp" />
-
-                    <com.directcreate.Utils.CustomTextView
-                        android:id="@+id/drawer_members_textview"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:layout_marginLeft="10dp"
-                        android:layout_toRightOf="@+id/drawer_membersicon"
-                        android:text="@string/drawer_list_mem_label"
-                        android:textColor="#4E4E4E"
-                        android:textSize="17sp" />
-                </RelativeLayout>
-
-
-                <RelativeLayout
-                    android:id="@+id/drawer_mag_layout"
-                    android:layout_width="fill_parent"
-                    android:layout_height="65dp"
-                    android:layout_above="@id/drawer_members_layout"
-                    android:background="#ECECEC">
-
-                    <View
-                        android:layout_width="fill_parent"
-                        android:layout_height="2px"
-                        android:layout_alignParentLeft="true"
-                        android:layout_alignParentTop="true"
-                        android:background="#cdcdcd" />
-
-                    <ImageView
-                        android:id="@+id/drawer_magicon"
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
-                        android:layout_alignParentLeft="true"
-                        android:layout_centerVertical="true"
-                        android:layout_marginLeft="15dp"
-                        android:src="@drawable/ic_printing_magazine_icon" />
-
-                    <com.directcreate.Utils.CustomTextView
-                        android:id="@+id/drawer_mag_textview"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:layout_marginLeft="10dp"
-                        android:layout_toRightOf="@+id/drawer_magicon"
-                        android:text="@string/drawer_list_mag_label"
-                        android:textColor="#4E4E4E"
-                        android:textSize="17sp" />
-                </RelativeLayout>
-
-
-                <RelativeLayout
-                    android:id="@+id/drawer_openshop_layout"
-                    android:layout_width="fill_parent"
-                    android:layout_height="65dp"
-                    android:layout_above="@id/drawer_mag_layout"
-                    android:background="#ECECEC"
-                    android:visibility="gone">
-
-                    <View
-                        android:layout_width="fill_parent"
-                        android:layout_height="2px"
-                        android:layout_alignParentLeft="true"
-                        android:layout_alignParentTop="true"
-                        android:background="#cdcdcd" />
-
-                    <ImageView
-                        android:id="@+id/drawer_openshopicon"
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
-                        android:layout_alignParentLeft="true"
-                        android:layout_centerVertical="true"
-                        android:layout_marginLeft="15dp"
-                        android:src="@drawable/openshop_icon" />
-
-                    <com.directcreate.Utils.CustomTextView
-                        android:id="@+id/drawer_openshop_textview"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:layout_marginLeft="10dp"
-                        android:layout_toRightOf="@+id/drawer_openshopicon"
-                        android:text="@string/drawer_list_openshop_label"
-                        android:textColor="#4E4E4E"
-                        android:textSize="17sp" />
-                </RelativeLayout>
-        -->
     </RelativeLayout>
 
 </android.support.v4.widget.DrawerLayout>

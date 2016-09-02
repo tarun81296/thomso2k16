@@ -87,9 +87,11 @@ public class NavigationDrawerPage extends AppCompatActivity {
                     R.drawable.info_icon,
                     R.drawable.signout_icon};*/
 
-
-        drawerItems = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, title);
+int [] icon =new int[]{R.drawable.map,
+                       R.drawable.user1};
+        drawerItems = new ArrayAdapter<int,String>(this, R.layout.drawer_list_item,icon, title);
         mDrawerList.setAdapter(drawerItems);
+
         NavigationDrawerPage.mSelectedItem_text_pos = 1;
 
      //   mMenuAdapter = new HomeMenuListAdapter(NavigationDrawerPage.this,
