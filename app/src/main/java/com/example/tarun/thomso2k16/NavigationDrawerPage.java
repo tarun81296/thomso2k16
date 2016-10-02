@@ -22,6 +22,9 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.tarun.thomso2k16.adapter.NavDrawerAdapter;
+import com.example.tarun.thomso2k16.adapter.SingleEventPage;
+
 import java.util.HashMap;
 
 public class NavigationDrawerPage extends AppCompatActivity {
@@ -54,23 +57,19 @@ public class NavigationDrawerPage extends AppCompatActivity {
     private void addDrawerItems() {
 
             title = new String[]{
-                    "UserName",
+                    "",
                     "Events",
-                    "Day 0",
-                    "Day 1",
-                    "Day 2",
-                    "Day 3",
                     "Recent Events",
                     "Maps",
                     "Team",
                     "Sponsors",
             ""};
                     if (session.isLoggedIn()){
-                   title[10]= "Log Out";
+                   title[6]= "Log Out";
                     }
                      else
                     {
-                        title[10]="Log In";
+                        title[6]="Log In";
                     };
            /* icon = new int[]{
                     R.drawable.userprofile,
@@ -87,10 +86,17 @@ public class NavigationDrawerPage extends AppCompatActivity {
                     R.drawable.info_icon,
                     R.drawable.signout_icon};*/
 
-int [] icon =new int[]{R.drawable.map,
-                       R.drawable.user1};
-        drawerItems = new ArrayAdapter<int,String>(this, R.layout.drawer_list_item,icon, title);
-        mDrawerList.setAdapter(drawerItems);
+int [] icon =new int[]{R.drawable.ic_event_black_24dp,
+                       R.drawable.ic_event_black_24dp,
+                       R.drawable.ic_schedule_black_24dp,
+                       R.drawable.ic_place_black_24dp,
+                       R.drawable.ic_info_outline_black_24dp,
+                       R.drawable.ic_shopping_cart_black_24dp,
+                       R.drawable.ic_power_settings_new_black_24dp};
+        NavDrawerAdapter nda= new NavDrawerAdapter(context,title,icon);
+        mDrawerList.setAdapter(nda);
+     //   drawerItems = new ArrayAdapter<String>(this, R.layout.drawer_list_item, title);
+      //  mDrawerList.setAdapter(drawerItems);
 
         NavigationDrawerPage.mSelectedItem_text_pos = 1;
 
@@ -143,7 +149,8 @@ int [] icon =new int[]{R.drawable.map,
                                     overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
                                     break;
                                 case 6:
-
+                                          Intent i2 = new Intent(NavigationDrawerPage.this, SingleEventPage.class);
+                                    startActivity(i2);
                                     break;
                                 case 7:
 

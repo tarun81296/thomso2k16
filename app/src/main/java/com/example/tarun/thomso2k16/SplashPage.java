@@ -72,7 +72,7 @@ public class SplashPage extends AppCompatActivity {
               // dbh.getInput(event);
                 if(cic.isConnectingToInternet()){
                     context.deleteDatabase("THOMSO.db");
-                    JsonRequest("http://dev-test.co.nf/events.php");
+                    JsonRequest("http://thomso.in/Events-new.php");
                 }
                 if (session.isLoggedIn())
                 {

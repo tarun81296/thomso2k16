@@ -2,6 +2,7 @@ package com.example.tarun.thomso2k16;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -25,11 +26,16 @@ public class EventsPage extends AppCompatActivity {
         days_adapter=new Events_ViewPagerAdapter(getSupportFragmentManager(),titles,Numoftabs);
         // Initialize the ViewPager and set an adapter
         event_daywise_tabs= (ViewPager) findViewById(R.id.event_daywise_tabs);
+
         event_daywise_tabs.setAdapter(days_adapter);
 
         // Bind the tabs to the ViewPager
         PagerSlidingTabStrip tabs = (PagerSlidingTabStrip) findViewById(R.id.events_days_tabs);
+        tabs.setTextColor(Color.WHITE );
+        tabs.setIndicatorColor(Color.WHITE);
+
         tabs.setViewPager(event_daywise_tabs);
+
 
 
     }

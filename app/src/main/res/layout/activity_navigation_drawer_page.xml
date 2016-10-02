@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
 
-    android:background="#1c1c1c">
+    android:background="#FFFFFF">
 
     <!-- Side navigation drawer UI -->
 
@@ -34,8 +34,6 @@
             android:layout_gravity="left|start"
             android:layout_below="@+id/nav_drawer_header_relativelayout"
             android:choiceMode="singleChoice"
-            android:divider="#ECECEC"
-            android:dividerHeight="1px"
             android:scrollbars="none" />
     </RelativeLayout>
 
