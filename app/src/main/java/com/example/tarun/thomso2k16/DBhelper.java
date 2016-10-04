@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,6 +24,9 @@ public class DBhelper extends SQLiteOpenHelper {
     private static final String COLUMN_EventDate="EventDate";
     private static final String COLUMN_EventVenue="EventVenue";
     private static final String COLUMN_EventDay="EventDay";
+    private static final String COLUMN_EventImage="EventImage";
+    private static final String COLUMN_CoordinatorName="CoordinatorName";
+    private static final String COLUMN_CoordinatorNumber="CoordinatorNumber";
     public DBhelper(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
         super(context, DATABASE_NAME, factory, DATABASE_VERSION);
     }
@@ -31,7 +35,7 @@ public class DBhelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         String query= "CREATE TABLE " + TABLE_EVENTS + "( " +COLUMN_id+" INTEGER PRIMARY KEY AUTOINCREMENT,"+ COLUMN_EventName + " TEXT,"
                 + COLUMN_EventDescription + " TEXT,"+ COLUMN_EventDate + " TEXT," + COLUMN_EventTime + " TEXT," + COLUMN_EventVenue + " TEXT,"
-                + COLUMN_EventDay + " TEXT " + ");";
+                + COLUMN_EventDay + " TEXT,"+COLUMN_EventImage +" TEXT,"+COLUMN_CoordinatorName+" TEXT,"+COLUMN_CoordinatorNumber+" TEXT "+ ");";
         db.execSQL(query);
     }
 
@@ -48,12 +52,15 @@ public class DBhelper extends SQLiteOpenHelper {
         values.put (COLUMN_EventTime,text.getEventTime());
         values.put (COLUMN_EventVenue,text.getEventVenue());
         values.put(COLUMN_EventDay,text.getEventDay());
+        values.put(COLUMN_EventImage,text.getEventImage());
+        values.put(COLUMN_CoordinatorName,text.getCoordinatorName());
+        values.put(COLUMN_CoordinatorNumber,text.getCoordinatorNo());
         SQLiteDatabase db = getWritableDatabase();
         db.insert(TABLE_EVENTS, null, values);
         db.close();
     }
-    public int getEventsCount() {
-        String countQuery = "SELECT  * FROM " + TABLE_EVENTS;
+    public int getEventsCount(String query) {
+        String countQuery = query;
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(countQuery, null);
         // return count
@@ -74,6 +81,9 @@ public class DBhelper extends SQLiteOpenHelper {
                 event_detail.setEventDate(cursor.getString(3));
                 event_detail.setEventTime(cursor.getString(4));
                 event_detail.setEventVenue(cursor.getString(5));
+                event_detail.setEventImage(cursor.getString(6));
+                event_detail.setCoordinatorName(cursor.getString(7));
+                event_detail.setCoordinatorNo(cursor.getString(8));
                 events.add(event_detail);
             }catch(Exception e){
 
@@ -81,5 +91,26 @@ public class DBhelper extends SQLiteOpenHelper {
         }while(cursor.moveToNext());
         db.close();
         return events;
+    }
+    public Events_pojo getEventDetails(String EventName){
+        String query = "SELECT * FROM "+TABLE_EVENTS+" WHERE "+COLUMN_EventName+" =\""+EventName+"\" ;";
+        Log.e("query"," "+query);
+        Events_pojo ep = new Events_pojo();
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(query, null);
+        cursor.moveToFirst();
+        Log.e("cursor",cursor.toString());
+        if(cursor!=null){
+            ep.setEventName(cursor.getString(1));
+            ep.setEventDescription(cursor.getString(2));
+            ep.setEventDate(cursor.getString(3));
+            ep.setEventTime(cursor.getString(4));
+            ep.setEventVenue(cursor.getString(5));
+            ep.setEventDay(cursor.getString(6));
+            ep.setEventImage(cursor.getString(7));
+            ep.setCoordinatorName(cursor.getString(8));
+            ep.setCoordinatorNo(cursor.getString(9));
+        }
+        return ep;
     }
 }

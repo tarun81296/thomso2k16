@@ -11,7 +11,9 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import android.os.Handler;
+import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -25,6 +27,7 @@ import com.android.volley.ServerError;
 import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.bumptech.glide.Glide;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -32,7 +35,7 @@ import org.json.JSONObject;
 
 public class SplashPage extends AppCompatActivity {
     // Splash screen timer
-    private static int SPLASH_TIME_OUT = 2000;
+    private static int SPLASH_TIME_OUT = 4000;
     public JsonObjectRequest jsonObjReq;
       public Context context;
     // Session Manager Class
@@ -41,6 +44,7 @@ public class SplashPage extends AppCompatActivity {
     public CheckInternetConnection cic;
     public Boolean isInternetPresent=false;
     String commonid;
+    ImageView invisible;
     public DBhelper dbh;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +56,7 @@ public class SplashPage extends AppCompatActivity {
         cic = new CheckInternetConnection(context);
         session = new SessionManager(context);
         commonsession= new CommonIdSessionManager(context);
+        invisible=(ImageView)findViewById(R.id.imageView);
         dbh= new DBhelper(context,null,null,1);
         new Handler().postDelayed(new Runnable()
         {
@@ -72,7 +77,7 @@ public class SplashPage extends AppCompatActivity {
               // dbh.getInput(event);
                 if(cic.isConnectingToInternet()){
                     context.deleteDatabase("THOMSO.db");
-                    JsonRequest("http://thomso.in/Events-new.php");
+                    JsonRequest("http://thomso.in/app/Events-new.php");
                 }
                 if (session.isLoggedIn())
                 {
@@ -135,7 +140,101 @@ public class SplashPage extends AppCompatActivity {
                             event.setEventTime(object.getString("Time"));
                             event.setEventVenue(object.getString("Venue"));
                             event.setEventDay(object.getString("Day"));
+                            event.setEventImage("http://thomso.in/"+object.getString("Image"));
+                            Log.e("EventImage","http://thomso.in/"+object.getString("Image"));
+                            event.setCoordinatorName(object.getString("Coordinator Name"));
+                            Glide.
+                                    with(SplashPage.this).
+                                    load("http://www.thomso.in/register/"+object.getString("Image"))
+                                    //    .diskCacheStrategy(DiskCacheStrategy.RESULT)
+                                    .into(invisible);
+                            event.setCoordinatorNo(object.getString("Coordinator Number"));
                             dbh.getInput(event);
+
+                        }
+                    }
+                    JSONArray jarray1 = response.getJSONArray("Day1");
+                    if(jarray.length()>0)
+                    {
+                        for (int i = 0; i < jarray1.length(); i++)
+                        {
+                            JSONObject object1 = jarray1.getJSONObject(i);
+
+
+                            Events_pojo event1 = new Events_pojo();
+                            event1.setEventName(object1.getString("Name"));
+                            event1.setEventDescription(object1.getString("Description"));
+                            event1.setEventDate(object1.getString("Date"));
+                            event1.setEventTime(object1.getString("Time"));
+                            event1.setEventVenue(object1.getString("Venue"));
+                            event1.setEventDay(object1.getString("Day"));
+                            event1.setEventImage("http://thomso.in/"+object1.getString("Image"));
+                            Log.e("EventImage",object1.getString("Image"));
+                            event1.setCoordinatorName(object1.getString("Coordinator Name"));
+                            Glide.
+                                    with(SplashPage.this).
+                                    load("http://www.thomso.in/"+object1.getString("Image"))
+                                    //    .diskCacheStrategy(DiskCacheStrategy.RESULT)
+                                    .into(invisible);
+                            event1.setCoordinatorNo(object1.getString("Coordinator Number"));
+                            dbh.getInput(event1);
+
+                        }
+                    }
+                    JSONArray jarray2 = response.getJSONArray("Day2");
+                    if(jarray.length()>0)
+                    {
+                        for (int i = 0; i < jarray2.length(); i++)
+                        {
+                            JSONObject object1 = jarray2.getJSONObject(i);
+
+
+                            Events_pojo event1 = new Events_pojo();
+                            event1.setEventName(object1.getString("Name"));
+                            event1.setEventDescription(object1.getString("Description"));
+                            event1.setEventDate(object1.getString("Date"));
+                            event1.setEventTime(object1.getString("Time"));
+                            event1.setEventVenue(object1.getString("Venue"));
+                            event1.setEventDay(object1.getString("Day"));
+                            event1.setEventImage("http://thomso.in/"+object1.getString("Image"));
+                            Log.e("EventImage","http://thomso.in/"+object1.getString("Image"));
+                            event1.setCoordinatorName(object1.getString("Coordinator Name"));
+                            Glide.
+                                    with(SplashPage.this).
+                                    load("http://www.thomso.in/register/"+object1.getString("Image"))
+                                    //    .diskCacheStrategy(DiskCacheStrategy.RESULT)
+                                    .into(invisible);
+                            event1.setCoordinatorNo(object1.getString("Coordinator Number"));
+                            dbh.getInput(event1);
+
+                        }
+                    }
+                    JSONArray jarray3 = response.getJSONArray("Day3");
+                    if(jarray.length()>0)
+                    {
+                        for (int i = 0; i < jarray3.length(); i++)
+                        {
+                            JSONObject object1 = jarray3.getJSONObject(i);
+
+
+                            Events_pojo event1 = new Events_pojo();
+                            event1.setEventName(object1.getString("Name"));
+                            event1.setEventDescription(object1.getString("Description"));
+                            event1.setEventDate(object1.getString("Date"));
+                            event1.setEventTime(object1.getString("Time"));
+                            event1.setEventVenue(object1.getString("Venue"));
+                            event1.setEventDay(object1.getString("Day"));
+                            event1.setEventImage("http://thomso.in/"+object1.getString("Image"));
+                            Log.e("EventImage","http://thomso.in/"+object1.getString("Image"));
+                            event1.setCoordinatorName(object1.getString("Coordinator Name"));
+                            Glide.
+                                    with(SplashPage.this).
+                                    load("http://www.thomso.in/register/"+object1.getString("Image"))
+                                    //    .diskCacheStrategy(DiskCacheStrategy.RESULT)
+                                    .into(invisible);
+                            event1.setCoordinatorNo(object1.getString("Coordinator Number"));
+                            dbh.getInput(event1);
+
                         }
                     }
 

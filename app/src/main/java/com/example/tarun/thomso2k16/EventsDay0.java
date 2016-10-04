@@ -1,6 +1,7 @@
 package com.example.tarun.thomso2k16;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -9,8 +10,12 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+
+import com.example.tarun.thomso2k16.adapter.EventsListAdapter;
+import com.example.tarun.thomso2k16.adapter.SingleEventPage;
 
 import java.util.List;
 
@@ -36,7 +41,7 @@ public class EventsDay0 extends Fragment {
     private Boolean isInternetPresent;
     private Context context;
     public ListView eventslist;
-    public ArrayAdapter<String> eventsAdapter;
+    public EventsListAdapter eventsAdapter;
     public EventsDay0() {
         // Required empty public constructor
     }
@@ -70,7 +75,7 @@ public class EventsDay0 extends Fragment {
         eventslist= (ListView)rootView.findViewById(R.id.evens_list);
         dbh= new DBhelper(context,null,null,1);
         List<Events_pojo> event = dbh.showEvents("SELECT * FROM " + TABLE_EVENTS + " WHERE "+COLUMN_EventDay+" ='0' "+" ;");
-        int n = dbh.getEventsCount();
+        int n = dbh.getEventsCount("SELECT * FROM " + TABLE_EVENTS + " WHERE "+COLUMN_EventDay+" ='0' "+" ;");
         String[] tar = new String[n];
         Log.e("debug","debug 1");
         int i = 0 ;
@@ -80,8 +85,17 @@ public class EventsDay0 extends Fragment {
           Log.e("debug","Name:- "+ep.getEventName());
             i++;
         }
-        eventsAdapter= new ArrayAdapter<String>(context,android.R.layout.simple_list_item_1,tar);
+        eventsAdapter= new EventsListAdapter(context,tar);
         eventslist.setAdapter(eventsAdapter);
+       eventslist.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+           @Override
+           public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+               Intent i = new Intent(getActivity(),SingleEventPage.class);
+               i.putExtra("EventName",eventsAdapter.getItem(position).toString());
+               Log.e("debug",eventsAdapter.getItem(position).toString());
+               startActivity(i);
+           }
+       });
     return rootView;
     }
 

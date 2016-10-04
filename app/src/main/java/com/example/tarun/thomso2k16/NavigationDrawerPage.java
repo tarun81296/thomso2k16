@@ -127,30 +127,30 @@ int [] icon =new int[]{R.drawable.ic_event_black_24dp,
                                     startActivity(i);
                                     break;
                                 case 2:
-                                       Fragment Day0 = new EventsDay0();
-                                    ft.replace(R.id.content_frame,Day0);
-                                    overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+                                //       Fragment Day0 = new EventsDay0();
+                                  //  ft.replace(R.id.content_frame,Day0);
+                                    //overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
                                     break;
                                 case 3:
-                                    Fragment Day1 = new EventsDay1();
-                                    ft.replace(R.id.content_frame,Day1);
-                                    overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+                                  //  Fragment Day1 = new EventsDay1();
+                                 //   ft.replace(R.id.content_frame,Day1);
+                                //    overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
                                     break;
 
                                 case 4:
-                                    Fragment Day2 = new EventsDay2();
-                                    ft.replace(R.id.content_frame,Day2);
-                                    overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+                                 //   Fragment Day2 = new EventsDay2();
+                                //    ft.replace(R.id.content_frame,Day2);
+                                //    overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
                                     break;
 
                                 case 5:
-                                    Fragment Day3 = new EventsDay3();
-                                    ft.replace(R.id.content_frame,Day3);
-                                    overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+                                 //   Fragment Day3 = new EventsDay3();
+                                //    ft.replace(R.id.content_frame,Day3);
+                                //    overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
                                     break;
                                 case 6:
-                                          Intent i2 = new Intent(NavigationDrawerPage.this, SingleEventPage.class);
-                                    startActivity(i2);
+                                 //         Intent i2 = new Intent(NavigationDrawerPage.this, SingleEventPage.class);
+                                //    startActivity(i2);
                                     break;
                                 case 7:
 

@@ -4,9 +4,10 @@
     android:layout_height="match_parent"
     tools:context="com.example.tarun.thomso2k16.EventsDay1">
 
-    <TextView
+    <ListView
+        android:id="@+id/evens_list_day1"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="Day 1................."/>
+        android:layout_below="@+id/tv_day0"/>
 
 </FrameLayout>
