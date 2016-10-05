@@ -25,8 +25,10 @@ public class DBhelper extends SQLiteOpenHelper {
     private static final String COLUMN_EventVenue="EventVenue";
     private static final String COLUMN_EventDay="EventDay";
     private static final String COLUMN_EventImage="EventImage";
-    private static final String COLUMN_CoordinatorName="CoordinatorName";
-    private static final String COLUMN_CoordinatorNumber="CoordinatorNumber";
+    private static final String COLUMN_CoordinatorName1="CoordinatorName1";
+    private static final String COLUMN_CoordinatorName2="CoordinatorName2";
+    private static final String COLUMN_CoordinatorNumber1="CoordinatorNumber1";
+    private static final String COLUMN_CoordinatorNumber2="CoordinatorNumber2";
     public DBhelper(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
         super(context, DATABASE_NAME, factory, DATABASE_VERSION);
     }
@@ -35,7 +37,8 @@ public class DBhelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         String query= "CREATE TABLE " + TABLE_EVENTS + "( " +COLUMN_id+" INTEGER PRIMARY KEY AUTOINCREMENT,"+ COLUMN_EventName + " TEXT,"
                 + COLUMN_EventDescription + " TEXT,"+ COLUMN_EventDate + " TEXT," + COLUMN_EventTime + " TEXT," + COLUMN_EventVenue + " TEXT,"
-                + COLUMN_EventDay + " TEXT,"+COLUMN_EventImage +" TEXT,"+COLUMN_CoordinatorName+" TEXT,"+COLUMN_CoordinatorNumber+" TEXT "+ ");";
+                + COLUMN_EventDay + " TEXT,"+COLUMN_EventImage +" TEXT,"+COLUMN_CoordinatorName1+" TEXT,"+COLUMN_CoordinatorNumber1+" TEXT,"+COLUMN_CoordinatorName2+
+                " TEXT,"+COLUMN_CoordinatorNumber2+" TEXT "+");";
         db.execSQL(query);
     }
 
@@ -53,8 +56,10 @@ public class DBhelper extends SQLiteOpenHelper {
         values.put (COLUMN_EventVenue,text.getEventVenue());
         values.put(COLUMN_EventDay,text.getEventDay());
         values.put(COLUMN_EventImage,text.getEventImage());
-        values.put(COLUMN_CoordinatorName,text.getCoordinatorName());
-        values.put(COLUMN_CoordinatorNumber,text.getCoordinatorNo());
+        values.put(COLUMN_CoordinatorName1,text.getCoordinatorName1());
+        values.put(COLUMN_CoordinatorNumber1,text.getCoordinatorNo1());
+        values.put(COLUMN_CoordinatorName2,text.getCoordinatorName2());
+        values.put(COLUMN_CoordinatorNumber2,text.getCoordinatorNo2());
         SQLiteDatabase db = getWritableDatabase();
         db.insert(TABLE_EVENTS, null, values);
         db.close();
@@ -81,9 +86,12 @@ public class DBhelper extends SQLiteOpenHelper {
                 event_detail.setEventDate(cursor.getString(3));
                 event_detail.setEventTime(cursor.getString(4));
                 event_detail.setEventVenue(cursor.getString(5));
-                event_detail.setEventImage(cursor.getString(6));
-                event_detail.setCoordinatorName(cursor.getString(7));
-                event_detail.setCoordinatorNo(cursor.getString(8));
+                event_detail.setEventDay(cursor.getString(6));
+                event_detail.setEventImage(cursor.getString(7));
+                event_detail.setCoordinatorName1(cursor.getString(8));
+                event_detail.setCoordinatorNo1(cursor.getString(9));
+                event_detail.setCoordinatorName2(cursor.getString(10));
+                event_detail.setCoordinatorNo2(cursor.getString(11));
                 events.add(event_detail);
             }catch(Exception e){
 
@@ -108,8 +116,10 @@ public class DBhelper extends SQLiteOpenHelper {
             ep.setEventVenue(cursor.getString(5));
             ep.setEventDay(cursor.getString(6));
             ep.setEventImage(cursor.getString(7));
-            ep.setCoordinatorName(cursor.getString(8));
-            ep.setCoordinatorNo(cursor.getString(9));
+            ep.setCoordinatorName1(cursor.getString(8));
+            ep.setCoordinatorNo1(cursor.getString(9));
+            ep.setCoordinatorName2(cursor.getString(10));
+            ep.setCoordinatorNo2(cursor.getString(11));
         }
         return ep;
     }

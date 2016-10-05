@@ -2,16 +2,20 @@ package com.example.tarun.thomso2k16.adapter;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.graphics.Palette;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.MenuItem;
+import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageView;
@@ -19,6 +23,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.example.tarun.thomso2k16.DBhelper;
+import com.example.tarun.thomso2k16.EventsPage;
 import com.example.tarun.thomso2k16.Events_pojo;
 import com.example.tarun.thomso2k16.R;
 
@@ -28,11 +33,14 @@ public class SingleEventPage extends AppCompatActivity {
     private Context context;
     private DBhelper dbh;
     private Bundle b;
-    String eName,eDescription,eVenue,eTime,eDay,eDate,eImage,coordinatorName,CoordinatorNo;
+    String eName,eDescription,eVenue,eTime,eDay,eDate,eImage,coordinatorName1,CoordinatorNo1;
     private Events_pojo eventDetails;
     private ImageView eventImage;
     private TextView eventDescription;
     private TextView eventTitle;
+    private FloatingActionButton contact_fab;
+    private String coordinatorName2;
+    private String CoordinatorNo2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,7 +52,13 @@ public class SingleEventPage extends AppCompatActivity {
         dynamicToolbarColoring();
         initialize();
 
-        collapsingToolbarLayout.setTitle("Test");
+        collapsingToolbarLayout.setTitle(eName);
+        contact_fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
     }
 
     private void toolbarTextAppearance() {
@@ -61,6 +75,7 @@ public class SingleEventPage extends AppCompatActivity {
         eventImage=(ImageView)findViewById(R.id.event_image);
         eventDescription=(TextView)findViewById(R.id.event_description);
         eventTitle=(TextView)findViewById(R.id.event_title);
+        contact_fab=(FloatingActionButton)findViewById(R.id.fab_contact);
         b= new Bundle();
         b= getIntent().getExtras();
         eName=b.getString("EventName");
@@ -71,21 +86,35 @@ public class SingleEventPage extends AppCompatActivity {
         eTime=eventDetails.getEventTime();
         eDay=eventDetails.getEventDay();
         eDate=eventDetails.getEventDate();
-        coordinatorName=eventDetails.getCoordinatorName();
-        CoordinatorNo=eventDetails.getCoordinatorNo();
+        coordinatorName1=eventDetails.getCoordinatorName1();
+        coordinatorName2=eventDetails.getCoordinatorName2();
+        CoordinatorNo1=eventDetails.getCoordinatorNo1();
+        CoordinatorNo2=eventDetails.getCoordinatorNo2();
         Log.e("Desc ",eDescription);
         Log.e("eImage ",eImage);
         Log.e("eTime ",eTime);
 
         setData();
     }
-
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                Intent i = new Intent(SingleEventPage.this, EventsPage.class);
+                startActivity(i);
+                finish();
+                break;
+        }
+        return true;
+    }
     private void setData() {
         Glide.
                 with(SingleEventPage.this).
                 load(eImage)
                 //    .diskCacheStrategy(DiskCacheStrategy.RESULT)
                 .into(eventImage);
+        eventTitle.setText(eName);
+        eventDescription.setText(eDescription);
     }
 
     private void dynamicToolbarColoring() {

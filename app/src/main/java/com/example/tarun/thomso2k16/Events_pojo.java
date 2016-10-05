@@ -4,7 +4,10 @@ package com.example.tarun.thomso2k16;
  * Created by tarun on 05-08-2016.
  */
 public class Events_pojo {
-    private String EventName, EventDescription,EventVenue,EventDate,EventTime,EventDay,EventImage,CoordinatorName,CoordinatorNo;
+    private String EventName, EventDescription,EventVenue,EventDate,EventTime,EventDay,EventImage,CoordinatorName1,CoordinatorNo1;
+    private String CoordinatorName2;
+    private String CoordinatorNo2;
+
     public void setEventName(String EventName){
         this.EventName= EventName;
     }
@@ -47,16 +50,28 @@ public class Events_pojo {
     public String getEventImage(){
         return EventImage;
     }
-    public void setCoordinatorName(String CoordinatorName){
-        this.CoordinatorName=CoordinatorName;
+    public void setCoordinatorName1(String CoordinatorName1){
+        this.CoordinatorName1=CoordinatorName1;
     }
-    public String getCoordinatorName(){
-        return CoordinatorName;
+    public String getCoordinatorName1(){
+        return CoordinatorName1;
     }
-    public void setCoordinatorNo(String CoordinatorNo){
-        this.CoordinatorNo=CoordinatorNo;
+    public void setCoordinatorNo1(String CoordinatorNo1){
+        this.CoordinatorNo1=CoordinatorNo1;
     }
-    public String getCoordinatorNo(){
-        return CoordinatorNo;
+    public String getCoordinatorNo1(){
+        return CoordinatorNo1;
+    }
+    public void setCoordinatorName2(String CoordinatorName2){
+        this.CoordinatorName2=CoordinatorName2;
+    }
+    public String getCoordinatorName2(){
+        return CoordinatorName2;
+    }
+    public void setCoordinatorNo2(String CoordinatorNo2){
+        this.CoordinatorNo2=CoordinatorNo2;
+    }
+    public String getCoordinatorNo2(){
+        return CoordinatorNo2;
     }
 }

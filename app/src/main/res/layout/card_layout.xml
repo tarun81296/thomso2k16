@@ -16,14 +16,16 @@
             android:layout_height="wrap_content"
             android:text="Event Title"
             android:id="@+id/event_title"
-            android:textSize="20sp" />
+            android:textSize="20sp"
+            android:textColor="#FFFFFF" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Event Descripion"
             android:id="@+id/event_description"
-            android:textSize="18sp" />
+            android:textSize="18sp"
+            android:textColor="#FFFFFF" />
 
     </LinearLayout>
 
