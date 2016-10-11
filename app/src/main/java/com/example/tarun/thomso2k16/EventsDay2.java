@@ -83,15 +83,19 @@ public class EventsDay2 extends Fragment {
         List<Events_pojo> event = dbh.showEvents("SELECT * FROM " + TABLE_EVENTS + " WHERE "+COLUMN_EventDay+" ='2' "+" ;");
         int n = dbh.getEventsCount("SELECT * FROM " + TABLE_EVENTS + " WHERE "+COLUMN_EventDay+" ='2' "+" ;");
         String[] tar = new String[n];
+        String[] venue = new String[n];
+        String[] time = new String[n];
         Log.e("debug","debug 1");
         int i = 0 ;
         Log.e("debug","n= "+n);
         for( Events_pojo ep: event){
             tar[i]=ep.getEventName();
+            venue[i]=ep.getEventVenue();
+            time[i]=ep.getEventTime();
             Log.e("debug","Name:- "+ep.getEventName());
             i++;
         }
-        eventsAdapter= new EventsListAdapter(context,tar);
+        eventsAdapter= new EventsListAdapter(context,tar,venue,time);
         eventslist.setAdapter(eventsAdapter);
         eventslist.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override

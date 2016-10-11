@@ -8,6 +8,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 /**
@@ -29,6 +30,7 @@ public class DBhelper extends SQLiteOpenHelper {
     private static final String COLUMN_CoordinatorName2="CoordinatorName2";
     private static final String COLUMN_CoordinatorNumber1="CoordinatorNumber1";
     private static final String COLUMN_CoordinatorNumber2="CoordinatorNumber2";
+    public int p =0;
     public DBhelper(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
         super(context, DATABASE_NAME, factory, DATABASE_VERSION);
     }
@@ -122,5 +124,170 @@ public class DBhelper extends SQLiteOpenHelper {
             ep.setCoordinatorNo2(cursor.getString(11));
         }
         return ep;
+    }
+    public List<Events_pojo> getOnGoingEvents(){
+        Calendar c = Calendar.getInstance();
+        int hour = c.get(Calendar.HOUR_OF_DAY);
+        int min = c.get(Calendar.MINUTE);
+        int date = c.get(Calendar.DAY_OF_MONTH);
+        Log.e("hour"," "+hour);
+        Log.e("min"," "+min);
+        Log.e("date"," "+date);
+
+        List<Events_pojo> al = new ArrayList<>();
+        SQLiteDatabase db = this.getWritableDatabase();
+        if(date==20){
+            String query = "SELECT * FROM "+TABLE_EVENTS+" WHERE "+COLUMN_EventDay+"=Day0";
+            Cursor cursor = db.rawQuery(query,null);
+            if(cursor.getCount()>0){
+                cursor.moveToFirst();
+                p=0;
+                do{
+                    try {
+                        String time= cursor.getString(4);
+                        String start=time.split("-")[0];
+                        String end=time.split("-")[1];
+                        int startHour=Integer.parseInt(start.split(":")[0]);
+                        int endHour=Integer.parseInt(end.split(":")[0]);
+                        if(startHour<hour&&hour<endHour) {
+                            Events_pojo event_detail = new Events_pojo();
+                            event_detail.setEventName(cursor.getString(1));
+                            event_detail.setEventDescription(cursor.getString(2));
+                            event_detail.setEventDate(cursor.getString(3));
+                            event_detail.setEventTime(cursor.getString(4));
+                            event_detail.setEventVenue(cursor.getString(5));
+                            event_detail.setEventDay(cursor.getString(6));
+                            event_detail.setEventImage(cursor.getString(7));
+                            event_detail.setCoordinatorName1(cursor.getString(8));
+                            event_detail.setCoordinatorNo1(cursor.getString(9));
+                            event_detail.setCoordinatorName2(cursor.getString(10));
+                            event_detail.setCoordinatorNo2(cursor.getString(11));
+                            p++;
+                            al.add(event_detail);
+                        }
+                    }catch(Exception e){
+                         throw e;
+                    }
+                }while(cursor.moveToNext());
+                db.close();
+
+            }
+
+        }
+        if(date==11){
+            String query = "SELECT * FROM "+TABLE_EVENTS+" WHERE "+COLUMN_EventDay+"=Day1";
+            Cursor cursor = db.rawQuery(query,null);
+            if(cursor.getCount()>0){
+                cursor.moveToFirst();
+                p=0;
+                do{
+                    try {
+                        String time= cursor.getString(4);
+                        String start=time.split("-")[0];
+                        String end=time.split("-")[1];
+                        int startHour=Integer.parseInt(start.split(":")[0]);
+                        int endHour=Integer.parseInt(end.split(":")[0]);
+                        if(startHour<hour&&hour<endHour) {
+                            Events_pojo event_detail = new Events_pojo();
+                            event_detail.setEventName(cursor.getString(1));
+                            event_detail.setEventDescription(cursor.getString(2));
+                            event_detail.setEventDate(cursor.getString(3));
+                            event_detail.setEventTime(cursor.getString(4));
+                            event_detail.setEventVenue(cursor.getString(5));
+                            event_detail.setEventDay(cursor.getString(6));
+                            event_detail.setEventImage(cursor.getString(7));
+                            event_detail.setCoordinatorName1(cursor.getString(8));
+                            event_detail.setCoordinatorNo1(cursor.getString(9));
+                            event_detail.setCoordinatorName2(cursor.getString(10));
+                            event_detail.setCoordinatorNo2(cursor.getString(11));
+                            p++;
+                            al.add(event_detail);
+                        }
+                    }catch(Exception e){
+                        throw e;
+                    }
+                }while(cursor.moveToNext());
+                db.close();
+
+            }
+
+        }
+        if(date==22){
+            String query = "SELECT * FROM "+TABLE_EVENTS+" WHERE "+COLUMN_EventDay+"=Day2";
+            Cursor cursor = db.rawQuery(query,null);
+            if(cursor.getCount()>0){
+                cursor.moveToFirst();
+                p=0;
+                do{
+                    try {
+                        String time= cursor.getString(4);
+                        String start=time.split("-")[0];
+                        String end=time.split("-")[1];
+                        int startHour=Integer.parseInt(start.split(":")[0]);
+                        int endHour=Integer.parseInt(end.split(":")[0]);
+                        if(startHour<hour&&hour<endHour) {
+                            Events_pojo event_detail = new Events_pojo();
+                            event_detail.setEventName(cursor.getString(1));
+                            event_detail.setEventDescription(cursor.getString(2));
+                            event_detail.setEventDate(cursor.getString(3));
+                            event_detail.setEventTime(cursor.getString(4));
+                            event_detail.setEventVenue(cursor.getString(5));
+                            event_detail.setEventDay(cursor.getString(6));
+                            event_detail.setEventImage(cursor.getString(7));
+                            event_detail.setCoordinatorName1(cursor.getString(8));
+                            event_detail.setCoordinatorNo1(cursor.getString(9));
+                            event_detail.setCoordinatorName2(cursor.getString(10));
+                            event_detail.setCoordinatorNo2(cursor.getString(11));
+                            p++;
+                            al.add(event_detail);
+                        }
+                    }catch(Exception e){
+                        throw e;
+                    }
+                }while(cursor.moveToNext());
+                db.close();
+
+            }
+
+        }
+        if(date==23){
+            String query = "SELECT * FROM "+TABLE_EVENTS+" WHERE "+COLUMN_EventDay+"=Day3";
+            Cursor cursor = db.rawQuery(query,null);
+            if(cursor.getCount()>0){
+                cursor.moveToFirst();
+                p=0;
+                do{
+                    try {
+                        String time= cursor.getString(4);
+                        String start=time.split("-")[0];
+                        String end=time.split("-")[1];
+                        int startHour=Integer.parseInt(start.split(":")[0]);
+                        int endHour=Integer.parseInt(end.split(":")[0]);
+                        if(startHour<hour&&hour<endHour) {
+                            Events_pojo event_detail = new Events_pojo();
+                            event_detail.setEventName(cursor.getString(1));
+                            event_detail.setEventDescription(cursor.getString(2));
+                            event_detail.setEventDate(cursor.getString(3));
+                            event_detail.setEventTime(cursor.getString(4));
+                            event_detail.setEventVenue(cursor.getString(5));
+                            event_detail.setEventDay(cursor.getString(6));
+                            event_detail.setEventImage(cursor.getString(7));
+                            event_detail.setCoordinatorName1(cursor.getString(8));
+                            event_detail.setCoordinatorNo1(cursor.getString(9));
+                            event_detail.setCoordinatorName2(cursor.getString(10));
+                            event_detail.setCoordinatorNo2(cursor.getString(11));
+                            p++;
+                            al.add(event_detail);
+                        }
+                    }catch(Exception e){
+                        throw e;
+                    }
+                }while(cursor.moveToNext());
+                db.close();
+
+            }
+
+        }
+        return al;
     }
 }

@@ -37,6 +37,7 @@ public class SessionManager {
     public static final String KEY_USERID = "userid";
 
     public static final String KEY_USERNAME = "username";
+    public static final String KEY_DATA = "data";
 
     public static final String KEY_USERIMAGE = "userimage";
 
@@ -74,7 +75,10 @@ public class SessionManager {
         // commit changes
         editor.commit();
     }
-
+public void dataEntered(){
+    editor.putBoolean(KEY_DATA,true);
+            editor.commit();
+}
     public void createUserImagesession(String userimage) {
         // Storing login value as TRUE
         editor.putString(KEY_USERIMAGE, userimage);
@@ -130,7 +134,9 @@ public class SessionManager {
         // return user
         return user;
     }
-
+    public String getImage(){
+        return pref.getString(KEY_USERIMAGE,"");
+    }
     /**
      * Clear session details
      * */
@@ -165,5 +171,8 @@ public class SessionManager {
     // Get Login State
     public boolean isLoggedIn() {
         return pref.getBoolean(IS_LOGIN, false);
+    }
+    public boolean isData() {
+        return pref.getBoolean(KEY_DATA, false);
     }
 }

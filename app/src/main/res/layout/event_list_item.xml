@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="55dp"
-    android:padding="12dp"
+    android:layout_height="60dp"
+    android:padding="5dp"
     android:background="#212121">
 
     <ImageView
@@ -20,6 +20,21 @@ android:layout_marginRight="10dp"
         android:textColor="#FFFFFF"
         android:text="text text"
         android:id="@+id/event_name"
-        android:singleLine="true"
+
         android:textSize="24dp" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#FFFFFF"
+        android:text="event venue"
+        android:id="@+id/event_venue"
+        android:layout_marginLeft="42dp"
+        android:layout_below="@+id/event_name"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/event_time"
+        android:text="9:00 - 12:00"
+        android:textColor="#FFFFFF"
+        android:layout_alignParentRight="true"/>
 </RelativeLayout>

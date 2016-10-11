@@ -11,7 +11,10 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.example.tarun.thomso2k16.NavigationDrawerPage;
 import com.example.tarun.thomso2k16.R;
+import com.example.tarun.thomso2k16.SessionManager;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -24,6 +27,7 @@ public class NavDrawerAdapter extends BaseAdapter {
     int[] icon;
     View itemView;
     LayoutInflater inflater;
+    SessionManager sm;
     public NavDrawerAdapter(Context context, String[] title,int[] icon ){
         this.context=context;
         this.title=title;
@@ -55,9 +59,13 @@ public class NavDrawerAdapter extends BaseAdapter {
         title_icon = (ImageView) itemView.findViewById(R.id.icon);
         nav_title = (TextView)itemView.findViewById(R.id.titles);
         profile_pic = (CircleImageView)itemView.findViewById(R.id.profile_image);
+        sm = new SessionManager(context);
         nav_title.setTextColor(Color.parseColor("#FFFFFF"));
       if(position==0) {
           hv.setVisibility(View.VISIBLE);
+          if(sm.isLoggedIn()){
+              Glide.with(context).load(sm.getImage()).into(profile_pic);
+          }
       }
        else if(position>=0) {
             nav_title.setText(title[position]);

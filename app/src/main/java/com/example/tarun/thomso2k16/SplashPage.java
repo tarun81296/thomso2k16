@@ -56,7 +56,7 @@ public class SplashPage extends AppCompatActivity {
         cic = new CheckInternetConnection(context);
         session = new SessionManager(context);
         commonsession= new CommonIdSessionManager(context);
-        invisible=(ImageView)findViewById(R.id.event_image);
+        invisible=(ImageView)findViewById(R.id.imageView);
         dbh= new DBhelper(context,null,null,1);
         new Handler().postDelayed(new Runnable()
         {
@@ -75,9 +75,11 @@ public class SplashPage extends AppCompatActivity {
                // event.setEventTime("time1");
                // event.setEventVenue("venue1");
               // dbh.getInput(event);
-                if(cic.isConnectingToInternet()){
-                    context.deleteDatabase("THOMSO.db");
-                    JsonRequest("http://thomso.in/app/Events-new.php");
+                if(session.isData()) {
+                    if (cic.isConnectingToInternet()) {
+                        context.deleteDatabase("THOMSO.db");
+                        JsonRequest("http://thomso.in/app/Events-new.php");
+                    }
                 }
                 if (session.isLoggedIn())
                 {
@@ -144,11 +146,11 @@ public class SplashPage extends AppCompatActivity {
                             Log.e("EventImage","http://thomso.in/"+object.getString("Image"));
                             event.setCoordinatorName1(object.getString("Coordinator Name1"));
                             event.setCoordinatorName2(object.getString("Coordinator Name2"));
-                            Glide.
+                           /* Glide.
                                     with(SplashPage.this).
                                     load("http://www.thomso.in/register/"+object.getString("Image"))
                                     //    .diskCacheStrategy(DiskCacheStrategy.RESULT)
-                                    .into(invisible);
+                                    .into(invisible);*/
                             event.setCoordinatorNo1(object.getString("Coordinator Number1"));
                             event.setCoordinatorNo2(object.getString("Coordinator Number2"));
                             dbh.getInput(event);
@@ -174,11 +176,11 @@ public class SplashPage extends AppCompatActivity {
                             Log.e("EventImage",object1.getString("Image"));
                             event1.setCoordinatorName1(object1.getString("Coordinator Name1"));
                             event1.setCoordinatorName2(object1.getString("Coordinator Name2"));
-                            Glide.
+                            /*Glide.
                                     with(SplashPage.this).
                                     load("http://www.thomso.in/register/"+object1.getString("Image"))
                                     //    .diskCacheStrategy(DiskCacheStrategy.RESULT)
-                                    .into(invisible);
+                                    .into(invisible);*/
                             event1.setCoordinatorNo1(object1.getString("Coordinator Number1"));
                             event1.setCoordinatorNo2(object1.getString("Coordinator Number2"));
                             dbh.getInput(event1);
@@ -204,11 +206,11 @@ public class SplashPage extends AppCompatActivity {
                             Log.e("EventImage","http://thomso.in/"+object1.getString("Image"));
                             event1.setCoordinatorName1(object1.getString("Coordinator Name1"));
                             event1.setCoordinatorName2(object1.getString("Coordinator Name2"));
-                            Glide.
+                            /*Glide.
                                     with(SplashPage.this).
                                     load("http://www.thomso.in/register/"+object1.getString("Image"))
                                     //    .diskCacheStrategy(DiskCacheStrategy.RESULT)
-                                    .into(invisible);
+                                    .into(invisible);*/
                             event1.setCoordinatorNo1(object1.getString("Coordinator Number1"));
                             event1.setCoordinatorNo2(object1.getString("Coordinator Number2"));
                             dbh.getInput(event1);
@@ -234,18 +236,18 @@ public class SplashPage extends AppCompatActivity {
                             Log.e("EventImage","http://thomso.in/"+object1.getString("Image"));
                             event1.setCoordinatorName1(object1.getString("Coordinator Name1"));
                             event1.setCoordinatorName2(object1.getString("Coordinator Name2"));
-                            Glide.
+                            /*Glide.
                                     with(SplashPage.this).
                                     load("http://www.thomso.in/register/"+object1.getString("Image"))
                                     //    .diskCacheStrategy(DiskCacheStrategy.RESULT)
-                                    .into(invisible);
+                                    .into(invisible);*/
                             event1.setCoordinatorNo1(object1.getString("Coordinator Number1"));
                             event1.setCoordinatorNo2(object1.getString("Coordinator Number2"));
                             dbh.getInput(event1);
 
                         }
                     }
-
+                            session.dataEntered();
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }

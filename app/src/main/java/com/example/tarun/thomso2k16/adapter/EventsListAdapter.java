@@ -15,14 +15,19 @@ import com.example.tarun.thomso2k16.R;
 public class EventsListAdapter extends BaseAdapter {
     Context context;
     String[] title;
-
+    String[] venue;
+    String[] time;
     View eventView;
     LayoutInflater inflater;
-    public EventsListAdapter(Context context, String[] title ){
-        this.context=context;
-        this.title=title;
 
+
+    public EventsListAdapter(Context context, String[] title, String[] venue, String[] time) {
+        this.context = context;
+        this.title = title;
+        this.venue = venue;
+        this.time = time;
     }
+
     @Override
     public int getCount() {
         return title.length;
@@ -41,10 +46,16 @@ public class EventsListAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         TextView tv_eventName;
+        TextView tv_eventTime;
+        TextView tv_eventVenue;
         inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        eventView = inflater.inflate(R.layout.event_list_item , parent, false);
-        tv_eventName = (TextView)eventView.findViewById(R.id.event_name);
+        eventView = inflater.inflate(R.layout.event_list_item, parent, false);
+        tv_eventName = (TextView) eventView.findViewById(R.id.event_name);
+        tv_eventVenue = (TextView) eventView.findViewById(R.id.event_venue);
+        tv_eventTime = (TextView) eventView.findViewById(R.id.event_time);
         tv_eventName.setText(title[position]);
+        tv_eventVenue.setText(venue[position]);
+        tv_eventTime.setText(time[position]);
         return eventView;
     }
 }
