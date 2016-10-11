@@ -1,6 +1,7 @@
 package com.example.tarun.thomso2k16.adapter;
 
 import android.app.Activity;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -19,6 +20,8 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageView;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -56,7 +59,21 @@ public class SingleEventPage extends AppCompatActivity {
         contact_fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                final Dialog dialog = new Dialog(SingleEventPage.this);
+                dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                dialog.setContentView(R.layout.call_radiobutton);
+                RadioGroup rg = (RadioGroup) dialog.findViewById(R.id.radio_group);
 
+
+                    RadioButton rb=new RadioButton(SingleEventPage.this); // dynamically creating RadioButton and adding to RadioGroup.
+                RadioButton rb1=new RadioButton(SingleEventPage.this);
+                        rb.setText(coordinatorName1 + "  " + CoordinatorNo1);
+                      rb1.setText(coordinatorName2 + "  " + CoordinatorNo2);
+                        rg.addView(rb);
+                        rg.addView(rb1);
+
+
+                dialog.show();
             }
         });
     }
