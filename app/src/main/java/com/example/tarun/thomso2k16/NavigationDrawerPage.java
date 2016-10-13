@@ -12,6 +12,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
@@ -51,7 +52,7 @@ public class NavigationDrawerPage extends AppCompatActivity {
         setContentView(R.layout.activity_navigation_drawer_page);
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         mDrawerList = (ListView) findViewById(R.id.navList);
-         sliderShow = (SliderLayout) findViewById(R.id.slider);
+        sliderShow = (SliderLayout) findViewById(R.id.slider);
         context = getApplicationContext();
         session = new SessionManager(context);
         mDrawer = (RelativeLayout) findViewById(R.id.drawer);
@@ -60,6 +61,7 @@ public class NavigationDrawerPage extends AppCompatActivity {
         addSlider();
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
+
 
     }
 
@@ -134,19 +136,20 @@ public class NavigationDrawerPage extends AppCompatActivity {
                                 ft.replace(R.id.content_frame, recentEvents);
                                 overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
                                 break;
-                            case 3:
-                                //  Fragment Day1 = new EventsDay1();
-                                //   ft.replace(R.id.content_frame,Day1);
-                                //    overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
-                                break;
-
                             case 4:
-                                //   Fragment Day2 = new EventsDay2();
-                                //    ft.replace(R.id.content_frame,Day2);
-                                //    overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+                                Intent wvt = new Intent(NavigationDrawerPage.this, WebView.class);
+                                wvt.putExtra("url", "http://thomso.in/about.html");
+                                startActivity(wvt);
                                 break;
 
                             case 5:
+                                Log.e("debug", "sponsors clicked");
+                                Intent wvs = new Intent(NavigationDrawerPage.this, WebView.class);
+                                wvs.putExtra("url", "http://thomso.in/sponsors.html");
+                                startActivity(wvs);
+                                break;
+
+                            case 3:
                                 //   Fragment Day3 = new EventsDay3();
                                 //    ft.replace(R.id.content_frame,Day3);
                                 //    overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
@@ -270,11 +273,13 @@ public class NavigationDrawerPage extends AppCompatActivity {
         //    isBackPress = true;
         /// }
     }
+
     @Override
     protected void onStop() {
         sliderShow.stopAutoCycle();
         super.onStop();
     }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {

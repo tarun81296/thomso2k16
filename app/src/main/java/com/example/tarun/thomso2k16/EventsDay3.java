@@ -80,8 +80,8 @@ public class EventsDay3 extends Fragment {
         context = this.getActivity();
         eventslist= (ListView)rootView.findViewById(R.id.evens_list_day3);
         dbh= new DBhelper(context,null,null,1);
-        List<Events_pojo> event = dbh.showEvents("SELECT * FROM " + TABLE_EVENTS + " WHERE "+COLUMN_EventDay+" ='2' "+" ;");
-        int n = dbh.getEventsCount("SELECT * FROM " + TABLE_EVENTS + " WHERE "+COLUMN_EventDay+" ='2' "+" ;");
+        List<Events_pojo> event = dbh.showEvents("SELECT * FROM " + TABLE_EVENTS + " WHERE "+COLUMN_EventDay+" ='3' "+" ;");
+        int n = dbh.getEventsCount("SELECT * FROM " + TABLE_EVENTS + " WHERE "+COLUMN_EventDay+" ='3' "+" ;");
         String[] tar = new String[n];
         String[] venue = new String[n];
         String[] time = new String[n];

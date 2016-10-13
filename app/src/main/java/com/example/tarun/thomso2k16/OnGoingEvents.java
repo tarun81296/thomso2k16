@@ -58,10 +58,18 @@ public class OnGoingEvents extends Fragment {
                              Bundle savedInstanceState) {
         context = this.getActivity();
         View rootView = inflater.inflate(R.layout.fragment_on_going_events, container, false);
+        View empty = inflater.inflate(R.layout.activity_empty_on_going_events, container, false);
         eventslist = (ListView) rootView.findViewById(R.id.on_going_evens_list);
         dbh = new DBhelper(context, null, null, 1);
         List<Events_pojo> event = dbh.getOnGoingEvents();
         int n = dbh.p;
+
+        if (n == 0) {
+            // noRecentEvents();
+            Intent i = new Intent(getActivity(), EmptyOnGoingEvents.class);
+            startActivity(i);
+        }
+
         String[] tar = new String[n];
         String[] venue = new String[n];
         String[] time = new String[n];
@@ -88,6 +96,10 @@ public class OnGoingEvents extends Fragment {
         });
         // Inflate the layout for this fragment
         return rootView;
+    }
+
+    private void noRecentEvents() {
+
     }
 
 

@@ -137,7 +137,7 @@ public class DBhelper extends SQLiteOpenHelper {
         List<Events_pojo> al = new ArrayList<>();
         SQLiteDatabase db = this.getWritableDatabase();
         if(date==20){
-            String query = "SELECT * FROM "+TABLE_EVENTS+" WHERE "+COLUMN_EventDay+"=Day0";
+            String query = "SELECT * FROM "+TABLE_EVENTS+" WHERE "+COLUMN_EventDay+"=0";
             Cursor cursor = db.rawQuery(query,null);
             if(cursor.getCount()>0){
                 cursor.moveToFirst();
@@ -174,8 +174,8 @@ public class DBhelper extends SQLiteOpenHelper {
             }
 
         }
-        if(date==11){
-            String query = "SELECT * FROM "+TABLE_EVENTS+" WHERE "+COLUMN_EventDay+"=Day1";
+        if(date==21){
+            String query = "SELECT * FROM "+TABLE_EVENTS+" WHERE "+COLUMN_EventDay+"=1";
             Cursor cursor = db.rawQuery(query,null);
             if(cursor.getCount()>0){
                 cursor.moveToFirst();
@@ -185,8 +185,11 @@ public class DBhelper extends SQLiteOpenHelper {
                         String time= cursor.getString(4);
                         String start=time.split("-")[0];
                         String end=time.split("-")[1];
-                        int startHour=Integer.parseInt(start.split(":")[0]);
-                        int endHour=Integer.parseInt(end.split(":")[0]);
+                      //  String temp1= start.split(":")[0];
+                        Log.e("startHour"," "+start.split(":")[0].replace("\\s",""));
+                        Log.e("endHour"," "+end.split(":")[0].replace("\\s",""));
+                        int startHour=Integer.parseInt(start.split(":")[0].replace("\\s",""));
+                        int endHour=Integer.parseInt(end.split(":")[0].split(" ")[1]);
                         if(startHour<hour&&hour<endHour) {
                             Events_pojo event_detail = new Events_pojo();
                             event_detail.setEventName(cursor.getString(1));
@@ -213,7 +216,7 @@ public class DBhelper extends SQLiteOpenHelper {
 
         }
         if(date==22){
-            String query = "SELECT * FROM "+TABLE_EVENTS+" WHERE "+COLUMN_EventDay+"=Day2";
+            String query = "SELECT * FROM "+TABLE_EVENTS+" WHERE "+COLUMN_EventDay+"=2";
             Cursor cursor = db.rawQuery(query,null);
             if(cursor.getCount()>0){
                 cursor.moveToFirst();
@@ -251,7 +254,7 @@ public class DBhelper extends SQLiteOpenHelper {
 
         }
         if(date==23){
-            String query = "SELECT * FROM "+TABLE_EVENTS+" WHERE "+COLUMN_EventDay+"=Day3";
+            String query = "SELECT * FROM "+TABLE_EVENTS+" WHERE "+COLUMN_EventDay+"=3";
             Cursor cursor = db.rawQuery(query,null);
             if(cursor.getCount()>0){
                 cursor.moveToFirst();

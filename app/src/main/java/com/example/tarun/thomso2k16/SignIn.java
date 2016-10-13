@@ -39,20 +39,21 @@ public class SignIn extends AppCompatActivity {
     public EditText password;
     public String mUsername;
     public String mPassword;
+    public SessionManager sm;
     ProgressBar pb;
     Context context;
-    public SessionManager sm;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_in);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
-        context= getApplicationContext();
+        context = getApplicationContext();
         password = (EditText) findViewById(R.id.password_edittext);
         userName = (EditText) findViewById(R.id.username_edittext);
         sm = new SessionManager(context);
-        pb = (ProgressBar)findViewById(R.id.progress_bar);
+        pb = (ProgressBar) findViewById(R.id.progress_bar);
     }
 
     @Override
@@ -68,7 +69,7 @@ public class SignIn extends AppCompatActivity {
     }
 
     public void submitClicked(View view) {
-        Log.e("debug","submit clicked!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+        Log.e("debug", "submit clicked!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
         mPassword = password.getText().toString();
         mUsername = userName.getText().toString();
         if (mUsername.length() == 0) {
@@ -102,15 +103,15 @@ public class SignIn extends AppCompatActivity {
 
     class LoginAsyncTask extends AsyncTask<String, Void, Boolean> {
 
-        String msg = "", response_status = "",name="",email="",thomsoid="",image="";
+        String msg = "", response_status = "", name = "", email = "", thomsoid = "", image = "";
         int status;
         String Response = null;
 
         @Override
         protected void onPreExecute() {
             //super.onPreExecute();
-            Log.e("debug","on pre execute login async task");
-     pb.setVisibility(View.VISIBLE);
+            Log.e("debug", "on pre execute login async task");
+            pb.setVisibility(View.VISIBLE);
         }
 
         @Override
@@ -134,16 +135,16 @@ public class SignIn extends AppCompatActivity {
                 if (status == 200) {
                     JSONArray array = new JSONArray(Response);
                     JSONObject object = array.getJSONObject(0);
-                    Log.e("debug"," "+Response);
+                    Log.e("debug", " " + Response);
                     response_status = object.getString("success");
 
 
                     if (response_status.equalsIgnoreCase("1")) {
-                        Log.e("doInBackgroung","Logged in!!!");
-                        name=object.getString("name");
-                        email=object.getString("email");
-                        thomsoid=object.getString("thomsoid");
-                        image= "http://thomso.in/register/"+object.getString("image");
+                        Log.e("doInBackgroung", "Logged in!!!");
+                        name = object.getString("name");
+                        email = object.getString("email");
+                        thomsoid = object.getString("thomsoid");
+                        image = "http://thomso.in/register/" + object.getString("image");
                         //  Toast.makeText(SignIn.this, "Logged In!!!", Toast.LENGTH_SHORT).show();
                     }
                 }
@@ -169,13 +170,12 @@ public class SignIn extends AppCompatActivity {
         protected void onPostExecute(Boolean result) {
             pb.setVisibility(View.GONE);
             if (response_status.equalsIgnoreCase("1")) {
-                 sm.createLoginSession(name,email,thomsoid,"",image);
+                sm.createLoginSession(name, email, thomsoid, "", image);
                 sm.createUserImagesession(image);
                 Intent i = new Intent(SignIn.this, NavigationDrawerPage.class);
                 startActivity(i);
-            }
-            else if (response_status.equalsIgnoreCase("0")){
-                Toast.makeText(SignIn.this,"Invalid Details!!",Toast.LENGTH_LONG).show();
+            } else if (response_status.equalsIgnoreCase("0")) {
+                Toast.makeText(SignIn.this, "Invalid Details!!", Toast.LENGTH_LONG).show();
             }
 
         }

@@ -3,8 +3,15 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:background="#ffffff"
+    android:id="@+id/splash_page"
     android:gravity="center" >
-
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:scaleType="centerCrop"
+        android:background="@drawable/tarun"
+        android:id="@+id/logo"
+        />
 
     <ImageView
         android:layout_width="385dp"

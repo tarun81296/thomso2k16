@@ -21,7 +21,7 @@ public class EventsPage extends AppCompatActivity {
         setContentView(R.layout.events_page);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
-        String titles[]={"Day 0","Day 1","Day 2", "Day 3"};
+        String titles[]={"Day 0","Day 1","Day 2","Day 3"};
         int Numoftabs=4;
         days_adapter=new Events_ViewPagerAdapter(getSupportFragmentManager(),titles,Numoftabs);
         // Initialize the ViewPager and set an adapter

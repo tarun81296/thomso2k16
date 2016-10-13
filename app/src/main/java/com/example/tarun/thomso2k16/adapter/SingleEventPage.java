@@ -1,16 +1,19 @@
 package com.example.tarun.thomso2k16.adapter;
 
-import android.app.Activity;
+import android.Manifest;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.ActionBar;
-import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.graphics.Palette;
 import android.support.v7.widget.Toolbar;
@@ -18,7 +21,6 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
-import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -26,7 +28,6 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.example.tarun.thomso2k16.DBhelper;
-import com.example.tarun.thomso2k16.EventsPage;
 import com.example.tarun.thomso2k16.Events_pojo;
 import com.example.tarun.thomso2k16.R;
 
@@ -36,7 +37,7 @@ public class SingleEventPage extends AppCompatActivity {
     private Context context;
     private DBhelper dbh;
     private Bundle b;
-    String eName,eDescription,eVenue,eTime,eDay,eDate,eImage,coordinatorName1,CoordinatorNo1;
+    String eName, eDescription, eVenue, eTime, eDay, eDate, eImage, coordinatorName1, CoordinatorNo1;
     private Events_pojo eventDetails;
     private ImageView eventImage;
     private TextView eventDescription;
@@ -54,7 +55,8 @@ public class SingleEventPage extends AppCompatActivity {
         toolbarTextAppearance();
         dynamicToolbarColoring();
         initialize();
-
+        contact_fab.setImageResource(R.drawable.ic_phone_white_24dp);
+       // contact_fab.setBackgroundColor(Color.parseColor("#ffa203"));
         collapsingToolbarLayout.setTitle(eName);
         contact_fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -63,17 +65,61 @@ public class SingleEventPage extends AppCompatActivity {
                 dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
                 dialog.setContentView(R.layout.call_radiobutton);
                 RadioGroup rg = (RadioGroup) dialog.findViewById(R.id.radio_group);
+             //   Button left = (Button) dialog.findViewById(R.id.call_button);
 
+                RadioButton rb = new RadioButton(SingleEventPage.this); // dynamically creating RadioButton and adding to RadioGroup.
+                RadioButton rb1 = new RadioButton(SingleEventPage.this);
+                rb.setText(coordinatorName1 + " - " + CoordinatorNo1);
+                rb1.setText(coordinatorName2 + " - " + CoordinatorNo2);
+                rg.addView(rb);
+                rg.addView(rb1);
+                rg.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
 
-                    RadioButton rb=new RadioButton(SingleEventPage.this); // dynamically creating RadioButton and adding to RadioGroup.
-                RadioButton rb1=new RadioButton(SingleEventPage.this);
-                        rb.setText(coordinatorName1 + "  " + CoordinatorNo1);
-                      rb1.setText(coordinatorName2 + "  " + CoordinatorNo2);
-                        rg.addView(rb);
-                        rg.addView(rb1);
+                    @Override
+                    public void onCheckedChanged(RadioGroup group, int checkedId) {
+                        int childCount = group.getChildCount();
+                        for (int x = 0; x < childCount; x++) {
+                            RadioButton btn = (RadioButton) group.getChildAt(x);
 
+                                if (btn.getId() == checkedId&&btn.getId()==1) {
+                                    Log.e("selected RadioButton->", btn.getId()+"  "+btn.getText().toString());
+                                    String number = "tel:" + CoordinatorNo1;
+                                    Intent call = new Intent(Intent.ACTION_CALL, Uri.parse(number));
+                                    if (ActivityCompat.checkSelfPermission(SingleEventPage.this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+                                        Log.e("phone prmissions","not given");
+                                        // TODO: Consider calling
+                                        //    ActivityCompat#requestPermissions
+                                        // here to request the missing permissions, and then overriding
+                                        //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+                                        //                                          int[] grantResults)
+                                        // to handle the case where the user grants the permission. See the documentation
+                                        // for ActivityCompat#requestPermissions for more details.
+                                        return;
+                                    }
+                                    startActivity(call);
 
-                dialog.show();
+                            }
+                           else if (btn.getId() == checkedId&&btn.getId()==2) {
+                                Log.e("selected RadioButton->", btn.getId()+"  "+btn.getText().toString());
+                                String number = "tel:" + CoordinatorNo2;
+                                Intent call = new Intent(Intent.ACTION_CALL, Uri.parse(number));
+                                if (ActivityCompat.checkSelfPermission(SingleEventPage.this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+                                    // TODO: Consider calling
+                                    //    ActivityCompat#requestPermissions
+                                    // here to request the missing permissions, and then overriding
+                                    //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+                                    //                                          int[] grantResults)
+                                    // to handle the case where the user grants the permission. See the documentation
+                                    // for ActivityCompat#requestPermissions for more details.
+                                    return;
+                                }
+                                startActivity(call);
+
+                            }
+                        }
+                    }
+                });
+             dialog.show();
             }
         });
     }
@@ -117,8 +163,6 @@ public class SingleEventPage extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
-                Intent i = new Intent(SingleEventPage.this, EventsPage.class);
-                startActivity(i);
                 finish();
                 break;
         }
@@ -128,7 +172,6 @@ public class SingleEventPage extends AppCompatActivity {
         Glide.
                 with(SingleEventPage.this).
                 load(eImage)
-                //    .diskCacheStrategy(DiskCacheStrategy.RESULT)
                 .into(eventImage);
         eventTitle.setText(eName);
         eventDescription.setText(eDescription);

@@ -3,19 +3,21 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.example.tarun.thomso2k16">
 
+    <uses-permission android:name="android.permission.CALL_PHONE" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
         android:name=".AppController"
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/ic_thomso"
         android:label="@string/app_name"
         android:supportsRtl="true"
-
         android:theme="@style/AppTheme"
         tools:replace="abdroid:icon">
-        <activity android:name=".SplashPage">
+        <activity
+            android:name=".SplashPage"
+            android:theme="@style/Theme.AppCompat.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -25,8 +27,12 @@
         <activity android:name=".NavigationDrawerPage" />
         <activity android:name=".SignIn" />
         <activity android:name=".EventsPage" />
-        <activity android:name=".adapter.SingleEventPage"
-            android:theme="@style/Theme.AppCompat.NoActionBar"></activity>
+        <activity
+            android:name=".adapter.SingleEventPage"
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
+        <activity android:name=".WebView" />
+        <activity android:name=".EmptyOnGoingEvents" />
+        <activity android:name=".UserDetails"></activity>
     </application>
 
 </manifest>
