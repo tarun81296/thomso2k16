@@ -64,6 +64,7 @@ public class NavDrawerAdapter extends BaseAdapter {
       if(position==0) {
           hv.setVisibility(View.VISIBLE);
           if(sm.isLoggedIn()){
+              Log.e("image "," "+sm.getImage());
               Glide.with(context).load(sm.getImage()).into(profile_pic);
           }
       }

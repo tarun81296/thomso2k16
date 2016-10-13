@@ -70,7 +70,17 @@
             android:onClick="loginClicked"
             android:layout_toRightOf="@+id/sponsor"
             android:layout_below="@+id/map"
+            android:visibility="gone"
             android:background="@drawable/layer5"/>
+        <ImageButton
+            android:layout_width="120dp"
+            android:layout_height="140dp"
+            android:id="@+id/logout"
+            android:visibility="gone"
+            android:onClick="loginClicked"
+            android:layout_toRightOf="@+id/sponsor"
+            android:layout_below="@+id/map"
+            android:background="@drawable/logout"/>
     </RelativeLayout>
     <!-- Side navigation drawer UI -->
 

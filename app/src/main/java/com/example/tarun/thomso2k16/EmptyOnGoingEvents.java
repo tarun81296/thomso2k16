@@ -1,8 +1,8 @@
 package com.example.tarun.thomso2k16;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 
 public class EmptyOnGoingEvents extends AppCompatActivity {
@@ -24,5 +24,13 @@ public class EmptyOnGoingEvents extends AppCompatActivity {
                 return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent i = new Intent(EmptyOnGoingEvents.this, NavigationDrawerPage.class);
+        startActivity(i);
+        finish();
+
     }
 }

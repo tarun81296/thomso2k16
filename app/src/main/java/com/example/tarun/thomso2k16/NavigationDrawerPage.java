@@ -18,6 +18,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -39,7 +40,8 @@ public class NavigationDrawerPage extends AppCompatActivity {
     private Context context;
     private SessionManager session;
     private SliderLayout sliderShow;
-
+    ImageButton login;
+    ImageButton logout;
     public static void closeDrawers() {
         if (mDrawerLayout != null && mDrawerLayout.isDrawerOpen(mDrawer)) {
             mDrawerLayout.closeDrawer(mDrawer);
@@ -53,9 +55,19 @@ public class NavigationDrawerPage extends AppCompatActivity {
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         mDrawerList = (ListView) findViewById(R.id.navList);
         sliderShow = (SliderLayout) findViewById(R.id.slider);
+        login = (ImageButton)findViewById(R.id.login);
+        logout= (ImageButton) findViewById(R.id.logout);
         context = getApplicationContext();
         session = new SessionManager(context);
         mDrawer = (RelativeLayout) findViewById(R.id.drawer);
+        if (session.isLoggedIn()) {
+            logout.setVisibility(View.VISIBLE);
+            login.setVisibility(View.GONE);
+
+        } else {
+            login.setVisibility(View.VISIBLE);
+            logout.setVisibility(View.GONE);
+        }
         addDrawerItems();
         setupDrawer();
         addSlider();
