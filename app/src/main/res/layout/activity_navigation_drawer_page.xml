@@ -4,10 +4,13 @@
     android:layout_height="match_parent"
 
     android:background="#FFFFFF">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
     <com.daimajia.slider.library.SliderLayout
         android:id="@+id/slider"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="300dp"
         />
     <com.daimajia.slider.library.Indicators.PagerIndicator
         android:id="@+id/custom_indicator"
@@ -15,6 +18,60 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         />
+<ImageView
+    android:layout_width="match_parent"
+    android:layout_height="280dp"
+    android:background="@drawable/webtypo_03"/>
+        <ImageButton
+            android:layout_width="120dp"
+            android:layout_height="140dp"
+            android:id="@+id/events"
+            android:onClick="eventsClicked"
+            android:layout_below="@+id/slider"
+
+            android:background="@drawable/layer_2"/>
+        <ImageButton
+            android:layout_width="120dp"
+            android:layout_height="140dp"
+            android:id="@+id/recent_events"
+            android:onClick="recentClicked"
+            android:layout_toRightOf="@+id/events"
+            android:layout_below="@+id/slider"
+            android:background="@drawable/layer_3"/>
+        <ImageButton
+            android:layout_width="120dp"
+            android:layout_height="140dp"
+            android:id="@+id/map"
+            android:onClick="mapClicked"
+            android:layout_toRightOf="@+id/recent_events"
+            android:layout_below="@+id/slider"
+            android:background="@drawable/layer4"/>
+        <ImageButton
+            android:layout_width="120dp"
+            android:layout_height="140dp"
+            android:id="@+id/teams"
+            android:onClick="sponsorClicked"
+
+            android:layout_below="@+id/events"
+
+            android:background="@drawable/layer7"/>
+        <ImageButton
+            android:layout_width="120dp"
+            android:layout_height="140dp"
+            android:id="@+id/sponsor"
+            android:onClick="teamsClicked"
+             android:layout_toRightOf="@+id/teams"
+            android:layout_below="@+id/recent_events"
+            android:background="@drawable/layer6"/>
+        <ImageButton
+            android:layout_width="120dp"
+            android:layout_height="140dp"
+            android:id="@+id/login"
+            android:onClick="loginClicked"
+            android:layout_toRightOf="@+id/sponsor"
+            android:layout_below="@+id/map"
+            android:background="@drawable/layer5"/>
+    </RelativeLayout>
     <!-- Side navigation drawer UI -->
 
     <FrameLayout

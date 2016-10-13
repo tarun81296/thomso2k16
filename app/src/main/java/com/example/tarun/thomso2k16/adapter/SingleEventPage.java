@@ -79,9 +79,11 @@ public class SingleEventPage extends AppCompatActivity {
                     public void onCheckedChanged(RadioGroup group, int checkedId) {
                         int childCount = group.getChildCount();
                         for (int x = 0; x < childCount; x++) {
+                            Log.e("value x:"," "+x);
                             RadioButton btn = (RadioButton) group.getChildAt(x);
-
-                                if (btn.getId() == checkedId&&btn.getId()==1) {
+                            Log.e("btn.getId()"," "+btn.getId());
+                            Log.e("checkedId"," "+checkedId);
+                                if (btn.getId() == checkedId&&btn.getId()%2!=0) {
                                     Log.e("selected RadioButton->", btn.getId()+"  "+btn.getText().toString());
                                     String number = "tel:" + CoordinatorNo1;
                                     Intent call = new Intent(Intent.ACTION_CALL, Uri.parse(number));
@@ -97,13 +99,14 @@ public class SingleEventPage extends AppCompatActivity {
                                         return;
                                     }
                                     startActivity(call);
-
+                                    Log.e("value x:"," "+x);
                             }
-                           else if (btn.getId() == checkedId&&btn.getId()==2) {
+                           else if (btn.getId() == checkedId&&btn.getId()%2==0) {
                                 Log.e("selected RadioButton->", btn.getId()+"  "+btn.getText().toString());
                                 String number = "tel:" + CoordinatorNo2;
                                 Intent call = new Intent(Intent.ACTION_CALL, Uri.parse(number));
                                 if (ActivityCompat.checkSelfPermission(SingleEventPage.this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+                                    Log.e("phone prmissions","not given");
                                     // TODO: Consider calling
                                     //    ActivityCompat#requestPermissions
                                     // here to request the missing permissions, and then overriding
@@ -114,7 +117,7 @@ public class SingleEventPage extends AppCompatActivity {
                                     return;
                                 }
                                 startActivity(call);
-
+                                Log.e("value x:"," "+x);
                             }
                         }
                     }

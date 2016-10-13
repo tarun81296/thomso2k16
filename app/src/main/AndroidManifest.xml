@@ -17,6 +17,7 @@
         tools:replace="abdroid:icon">
         <activity
             android:name=".SplashPage"
+            android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -24,15 +25,30 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".NavigationDrawerPage" />
-        <activity android:name=".SignIn" />
-        <activity android:name=".EventsPage" />
+        <activity
+            android:name=".NavigationDrawerPage"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".SignIn"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".EventsPage"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".adapter.SingleEventPage"
+            android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.NoActionBar" />
-        <activity android:name=".WebView" />
-        <activity android:name=".EmptyOnGoingEvents" />
-        <activity android:name=".UserDetails"></activity>
+        <activity
+            android:name=".WebView"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".EmptyOnGoingEvents"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".UserDetails"
+            android:screenOrientation="portrait" />
+        <activity android:name=".MapActivity"
+            android:screenOrientation="portrait"></activity>
     </application>
 
 </manifest>

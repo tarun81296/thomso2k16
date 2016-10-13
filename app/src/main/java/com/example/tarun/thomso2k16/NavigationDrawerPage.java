@@ -68,11 +68,53 @@ public class NavigationDrawerPage extends AppCompatActivity {
     private void addSlider() {
         DefaultSliderView dsv = new DefaultSliderView(this);
         DefaultSliderView dsv1 = new DefaultSliderView(this);
-        dsv.image(R.drawable.main1);
-        dsv1.image(R.drawable.main2);
+        dsv.image(R.drawable.homescreen);
+        dsv1.image(R.drawable.layer8);
         sliderShow.addSlider(dsv);
         sliderShow.addSlider(dsv1);
         sliderShow.startAutoCycle();
+    }
+public void eventsClicked(View view){
+    Intent i = new Intent(NavigationDrawerPage.this, EventsPage.class);
+    startActivity(i);
+    overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+}
+    public void recentClicked(View view){
+        FragmentTransaction ft = getSupportFragmentManager()
+                .beginTransaction();
+        Fragment recentEvents = new OnGoingEvents();
+        ft.replace(R.id.content_frame, recentEvents);
+        overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+        ft.commit();
+    }
+    public void mapClicked(View view){
+        Intent map = new Intent(NavigationDrawerPage.this,MapActivity.class);
+        startActivity(map);
+        overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+    }
+    public void teamsClicked(View view){
+        Intent wvt = new Intent(NavigationDrawerPage.this, WebView.class);
+        wvt.putExtra("url", "http://thomso.in/about.html");
+        startActivity(wvt);
+        overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+    }
+    public void sponsorClicked(View view){
+        Intent wvs = new Intent(NavigationDrawerPage.this, WebView.class);
+        wvs.putExtra("url", "http://thomso.in/sponsors.html");
+        startActivity(wvs);
+        overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+    }
+    public void loginClicked(View view){
+        if (session.isLoggedIn()) {
+            session.logoutUser();
+            recreate();
+
+        } else {
+            Intent i1 = new Intent(context, SignIn.class);
+            startActivity(i1);
+            overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+
+        }
     }
 
     private void addDrawerItems() {
@@ -130,6 +172,7 @@ public class NavigationDrawerPage extends AppCompatActivity {
                             case 1:
                                 Intent i = new Intent(NavigationDrawerPage.this, EventsPage.class);
                                 startActivity(i);
+                                overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
                                 break;
                             case 2:
                                 Fragment recentEvents = new OnGoingEvents();
@@ -140,6 +183,7 @@ public class NavigationDrawerPage extends AppCompatActivity {
                                 Intent wvt = new Intent(NavigationDrawerPage.this, WebView.class);
                                 wvt.putExtra("url", "http://thomso.in/about.html");
                                 startActivity(wvt);
+                                overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
                                 break;
 
                             case 5:
@@ -147,12 +191,13 @@ public class NavigationDrawerPage extends AppCompatActivity {
                                 Intent wvs = new Intent(NavigationDrawerPage.this, WebView.class);
                                 wvs.putExtra("url", "http://thomso.in/sponsors.html");
                                 startActivity(wvs);
+                                overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
                                 break;
 
                             case 3:
-                                //   Fragment Day3 = new EventsDay3();
-                                //    ft.replace(R.id.content_frame,Day3);
-                                //    overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+                                  Intent map = new Intent(NavigationDrawerPage.this,MapActivity.class);
+                                startActivity(map);
+                                    overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
                                 break;
                             case 6:
                                 if (session.isLoggedIn()) {
@@ -162,6 +207,7 @@ public class NavigationDrawerPage extends AppCompatActivity {
                                 } else {
                                     Intent i1 = new Intent(context, SignIn.class);
                                     startActivity(i1);
+                                    overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
                                     break;
                                 }
                             case 7:
