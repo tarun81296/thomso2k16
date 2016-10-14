@@ -5,7 +5,7 @@ android {
     buildToolsVersion "23.0.3"
     useLibrary 'org.apache.http.legacy'
     defaultConfig {
-        applicationId "com.example.tarun.thomso2k16"
+        applicationId "com.tarun.thomso2k16"
         minSdkVersion 14
         targetSdkVersion 23
         versionCode 1
