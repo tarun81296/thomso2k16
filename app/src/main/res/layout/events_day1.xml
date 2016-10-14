@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.tarun.thomso2k16.EventsDay1">
+    tools:context="com.tarun.thomso2k16.EventsDay1">
 
     <ListView
         android:id="@+id/evens_list_day1"
