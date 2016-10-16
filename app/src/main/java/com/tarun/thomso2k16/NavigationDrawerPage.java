@@ -1,5 +1,6 @@
 package com.tarun.thomso2k16;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -9,6 +10,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -27,7 +29,7 @@ import com.daimajia.slider.library.SliderLayout;
 import com.daimajia.slider.library.SliderTypes.DefaultSliderView;
 import com.tarun.thomso2k16.adapter.NavDrawerAdapter;
 
-public class NavigationDrawerPage extends AppCompatActivity {
+public class NavigationDrawerPage extends ActionBarActivity {
     public static int mSelectedItem_text_pos;
     public static RelativeLayout mDrawer;
     private static DrawerLayout mDrawerLayout;
@@ -39,6 +41,7 @@ public class NavigationDrawerPage extends AppCompatActivity {
     private String[] title;
     private ActionBarDrawerToggle mDrawerToggle;
     private int position;
+    CheckInternetConnection cic;
     private Context context;
     private SessionManager session;
     private SliderLayout sliderShow;
@@ -59,8 +62,12 @@ public class NavigationDrawerPage extends AppCompatActivity {
         login = (ImageButton) findViewById(R.id.login);
         logout = (ImageButton) findViewById(R.id.logout);
         context = getApplicationContext();
+        cic= new CheckInternetConnection(context);
         session = new SessionManager(context);
         mDrawer = (RelativeLayout) findViewById(R.id.drawer);
+        if (!session.isData() && !cic.isConnectingToInternet()){
+            finish();
+        }
         if (session.isLoggedIn()) {
             logout.setVisibility(View.VISIBLE);
             login.setVisibility(View.GONE);

@@ -1,11 +1,13 @@
 package com.tarun.thomso2k16;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.provider.Settings;
 import android.support.design.widget.Snackbar;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.widget.ImageView;
@@ -33,7 +35,7 @@ import java.util.Random;
 
 public class SplashPage extends AppCompatActivity {
     // Splash screen timer
-    private static int SPLASH_TIME_OUT = 4000;
+    private static int SPLASH_TIME_OUT = 2000;
     public JsonObjectRequest jsonObjReq;
     public Context context;
     public CheckInternetConnection cic;
@@ -70,7 +72,15 @@ public class SplashPage extends AppCompatActivity {
                     JsonRequest1("http://thomso.in/app/team.php");
                 }
                 if (!session.isData() && !cic.isConnectingToInternet()) {
-                    Snackbar.make(sp, "Connect to the internet once", Snackbar.LENGTH_LONG).show();
+                     Log.e("no data","no data");
+                    Toast.makeText(context, "You need to connect to internet for first time", Toast.LENGTH_LONG).show();
+                    new Handler().postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            Log.e("run","in run");
+                            finish();
+                        }
+                    },1500);
                 }
                 if (session.isLoggedIn()) {
 //					Random r = new Random(System.currentTimeMillis());
