@@ -103,7 +103,7 @@ public class SignIn extends AppCompatActivity {
 
     class LoginAsyncTask extends AsyncTask<String, Void, Boolean> {
 
-        String msg = "", response_status = "", name = "", email = "", thomsoid = "", image = "";
+        String msg = "", response_status = "", name = "", college = "", thomsoid = "", image = "",qrcodevalue="";
         int status;
         String Response = null;
 
@@ -142,8 +142,9 @@ public class SignIn extends AppCompatActivity {
                     if (response_status.equalsIgnoreCase("1")) {
                         Log.e("doInBackgroung", "Logged in!!!");
                         name = object.getString("name");
-                        email = object.getString("email");
+                        college = object.getString("college");
                         thomsoid = object.getString("thomsoid");
+                        qrcodevalue=object.getString("qrcodevalue");
                         image = "http://thomso.in/register/" + object.getString("image");
                         //  Toast.makeText(SignIn.this, "Logged In!!!", Toast.LENGTH_SHORT).show();
                     }
@@ -170,7 +171,7 @@ public class SignIn extends AppCompatActivity {
         protected void onPostExecute(Boolean result) {
             pb.setVisibility(View.GONE);
             if (response_status.equalsIgnoreCase("1")) {
-                sm.createLoginSession(name, email, thomsoid, "", image);
+                sm.createLoginSession(name, college, thomsoid, qrcodevalue, image);
                 sm.createUserImagesession(image);
                 Intent i = new Intent(SignIn.this, NavigationDrawerPage.class);
                 startActivity(i);

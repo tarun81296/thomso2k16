@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
@@ -26,6 +27,7 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.tarun.thomso2k16.CheckInternetConnection;
 import com.tarun.thomso2k16.DBhelper;
 import com.tarun.thomso2k16.Events_pojo;
 import com.tarun.thomso2k16.R;
@@ -44,6 +46,8 @@ public class SingleEventPage extends AppCompatActivity {
     private FloatingActionButton contact_fab;
     private String coordinatorName2;
     private String CoordinatorNo2;
+    public CheckInternetConnection cd;
+    public Drawable drawable;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -136,6 +140,7 @@ public class SingleEventPage extends AppCompatActivity {
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
         dbh = new DBhelper(context, null, null, 1);
+        cd= new CheckInternetConnection(context);
         eventImage = (ImageView) findViewById(R.id.event_image);
         eventDescription = (TextView) findViewById(R.id.event_description);
         eventTitle = (TextView) findViewById(R.id.event_title);
@@ -157,7 +162,13 @@ public class SingleEventPage extends AppCompatActivity {
         Log.e("Desc ", eDescription);
         Log.e("eImage ", eImage);
         Log.e("eTime ", eTime);
-
+        String eImage1=eImage.split("/")[4];
+        Log.e("eImage1",eImage1.replace(".",",").split(",")[0]);
+        if(eName.equalsIgnoreCase("16frames")){
+            eImage="a"+eImage1;
+        }
+        drawable = getResources().getDrawable(getResources().getIdentifier(eImage1.replace(".",",").split(",")[0],"drawable",getPackageName()));
+        Log.e("drawable",drawable.toString());
         setData();
     }
 
@@ -172,10 +183,15 @@ public class SingleEventPage extends AppCompatActivity {
     }
 
     private void setData() {
-        Glide.
-                with(SingleEventPage.this).
-                load(eImage)
-                .into(eventImage);
+        if(cd.isConnectingToInternet()) {
+            Glide.
+                    with(SingleEventPage.this).
+                    load(eImage)
+                    .into(eventImage);
+        }
+        else{
+            eventImage.setImageDrawable(drawable);
+        }
         eventTitle.setText(eName);
         eventDescription.setText(eDescription);
     }

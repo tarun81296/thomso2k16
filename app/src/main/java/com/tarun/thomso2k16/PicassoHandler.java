@@ -1,5 +1,7 @@
 package com.tarun.thomso2k16;
 
+import com.squareup.picasso.Callback;
+
 /**
  * Created by tarun on 13-10-2016.
  */
@@ -11,7 +13,7 @@ public class PicassoHandler {
     @Inject
     App mApplication;
 
-    public ImageWarehouse(String fileName, ImageView container, String directory) {
+    public PicassoHandler(String fileName, ImageView container, String directory) {
         this.mFileName = fileName;
         this.mContainer = container;
         this.mDirectory = directory;

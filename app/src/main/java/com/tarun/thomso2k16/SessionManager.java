@@ -13,9 +13,9 @@ public class SessionManager {
     // User name (make variable public to access from outside)
     public static final String KEY_NAME = "name";
     // Email address (make variable public to access from outside)
-    public static final String KEY_EMAIL = "email";
+    public static final String KEY_COLLEGE = "college";
     public static final String KEY_USERID = "userid";
-    public static final String KEY_USERNAME = "username";
+    public static final String KEY_QRCODE = "qrcode";
     public static final String KEY_DATA = "data";
     public static final String KEY_USERIMAGE = "userimage";
     public static final String KEY_SIGNOUT_GOOGLEPLUS = "googleplus";
@@ -51,13 +51,13 @@ public class SessionManager {
     /**
      * Create login session
      */
-    public void createLoginSession(String name, String email, String userid, String username, String userimage) {
+    public void createLoginSession(String name, String college, String userid, String qrcodevalue, String userimage) {
         // Storing login value as TRUE
         editor.putBoolean(IS_LOGIN, true);
         editor.putString(KEY_NAME, name);
-        editor.putString(KEY_EMAIL, email);
+        editor.putString(KEY_COLLEGE, college);
         editor.putString(KEY_USERID, userid);
-        editor.putString(KEY_USERNAME, username);
+        editor.putString(KEY_QRCODE, qrcodevalue);
         editor.putString(KEY_USERIMAGE, userimage);
         //  editor.putString(KEY_IS_SELLER, isseller);
 
@@ -114,9 +114,9 @@ public class SessionManager {
         HashMap<String, String> user = new HashMap<String, String>();
         // user name
         user.put(KEY_NAME, pref.getString(KEY_NAME, ""));
-        user.put(KEY_EMAIL, pref.getString(KEY_EMAIL, ""));
+        user.put(KEY_COLLEGE, pref.getString(KEY_COLLEGE, ""));
         user.put(KEY_USERID, pref.getString(KEY_USERID, ""));
-        user.put(KEY_USERNAME, pref.getString(KEY_USERNAME, ""));
+        user.put(KEY_QRCODE, pref.getString(KEY_QRCODE, ""));
         user.put(KEY_USERIMAGE, pref.getString(KEY_USERIMAGE, ""));
         //   user.put(KEY_USERACTIVITY, pref.getString(KEY_USERACTIVITY, ""));
         //   user.put(KEY_IS_SELLER, pref.getString(KEY_IS_SELLER, ""));

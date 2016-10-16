@@ -186,7 +186,14 @@ public class NavigationDrawerPage extends AppCompatActivity {
                         switch (position) {
 
                             case 0:
-
+                                if(session.isLoggedIn()){
+                                    Intent ud = new Intent(NavigationDrawerPage.this,UserDetails.class);
+                                    startActivity(ud);
+                                    overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+                                }
+                              //     Intent ud = new Intent(NavigationDrawerPage.this,UserDetails.class);
+                              //  startActivity(ud);
+                              //  overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
                                 break;
                             case 1:
                                 Intent i = new Intent(NavigationDrawerPage.this, EventsPage.class);
