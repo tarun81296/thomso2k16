@@ -64,10 +64,10 @@ public class SplashPage extends AppCompatActivity {
             public void run() {
 
 
-                    if (cic.isConnectingToInternet()) {
-                        context.deleteDatabase("THOMSO.db");
-                        JsonRequest("http://thomso.in/app/Events-new.php");
-
+                if (cic.isConnectingToInternet()) {
+                    context.deleteDatabase("THOMSO.db");
+                    JsonRequest("http://thomso.in/app/Events-new.php");
+                    JsonRequest1("http://thomso.in/app/team.php");
                 }
                 if (!session.isData() && !cic.isConnectingToInternet()) {
                     Snackbar.make(sp, "Connect to the internet once", Snackbar.LENGTH_LONG).show();
@@ -103,23 +103,16 @@ public class SplashPage extends AppCompatActivity {
     }
 
     private void JsonRequest(String Url) {
-
-
         System.out.println("------------Events------------------" + Url);
-
         jsonObjReq = new JsonObjectRequest(Request.Method.GET, Url, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
-
                 System.out.println("------------Events Response--------" + response);
                 try {
-
                     JSONArray jarray = response.getJSONArray("Day0");
                     if (jarray.length() > 0) {
                         for (int i = 0; i < jarray.length(); i++) {
                             JSONObject object = jarray.getJSONObject(i);
-
-
                             Events_pojo event = new Events_pojo();
                             event.setEventName(object.getString("Name"));
                             event.setEventDescription(object.getString("Description"));
@@ -146,8 +139,6 @@ public class SplashPage extends AppCompatActivity {
                     if (jarray.length() > 0) {
                         for (int i = 0; i < jarray1.length(); i++) {
                             JSONObject object1 = jarray1.getJSONObject(i);
-
-
                             Events_pojo event1 = new Events_pojo();
                             event1.setEventName(object1.getString("Name"));
                             event1.setEventDescription(object1.getString("Description"));
@@ -174,8 +165,6 @@ public class SplashPage extends AppCompatActivity {
                     if (jarray.length() > 0) {
                         for (int i = 0; i < jarray2.length(); i++) {
                             JSONObject object1 = jarray2.getJSONObject(i);
-
-
                             Events_pojo event1 = new Events_pojo();
                             event1.setEventName(object1.getString("Name"));
                             event1.setEventDescription(object1.getString("Description"));
@@ -195,15 +184,12 @@ public class SplashPage extends AppCompatActivity {
                             event1.setCoordinatorNo1(object1.getString("Coordinator Number1"));
                             event1.setCoordinatorNo2(object1.getString("Coordinator Number2"));
                             dbh.getInput(event1);
-
                         }
                     }
                     JSONArray jarray3 = response.getJSONArray("Day3");
                     if (jarray.length() > 0) {
                         for (int i = 0; i < jarray3.length(); i++) {
                             JSONObject object1 = jarray3.getJSONObject(i);
-
-
                             Events_pojo event1 = new Events_pojo();
                             event1.setEventName(object1.getString("Name"));
                             event1.setEventDescription(object1.getString("Description"));
@@ -223,24 +209,17 @@ public class SplashPage extends AppCompatActivity {
                             event1.setCoordinatorNo1(object1.getString("Coordinator Number1"));
                             event1.setCoordinatorNo2(object1.getString("Coordinator Number2"));
                             dbh.getInput(event1);
-
                         }
                     }
                     session.dataEntered();
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-
-
                 //------on post execute-----
-
-
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-
-
                 if (error instanceof TimeoutError || error instanceof NoConnectionError) {
                     Toast.makeText(context, "Unable to fetch data from server", Toast.LENGTH_LONG).show();
                 } else if (error instanceof AuthFailureError) {
@@ -259,12 +238,61 @@ public class SplashPage extends AppCompatActivity {
                 }
             }
         });
-
         jsonObjReq.setRetryPolicy(new DefaultRetryPolicy(30000,
                 DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
                 DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
-
         // Adding request to request queue
+        AppController.getInstance().addToRequestQueue(jsonObjReq);
+    }
+
+    private void JsonRequest1(String Url) {
+        System.out.println("------------Team------------------" + Url);
+        jsonObjReq = new JsonObjectRequest(Request.Method.GET, Url, null, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+
+                System.out.println("------------Team Response--------" + response);
+                try {
+
+                    JSONArray jarray = response.getJSONArray("team");
+                    if (jarray.length() > 0) {
+                        for (int i = 0; i < jarray.length(); i++) {
+                            JSONObject object = jarray.getJSONObject(i);
+                            TeamPojo tp = new TeamPojo();
+                            tp.setName(object.getString("name"));
+                            tp.setNumber(object.getString("number"));
+                            tp.setPost(object.getString("post"));
+                            dbh.getTeamInput(tp);
+                        }
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                if (error instanceof TimeoutError || error instanceof NoConnectionError) {
+                    Toast.makeText(context, "Unable to fetch data from server", Toast.LENGTH_LONG).show();
+                } else if (error instanceof AuthFailureError) {
+                    //TODO
+                    Toast.makeText(context, "AuthFailureError", Toast.LENGTH_LONG).show();
+                } else if (error instanceof ServerError) {
+                    //TODO
+                    Toast.makeText(context, "ServerError", Toast.LENGTH_LONG).show();
+                } else if (error instanceof NetworkError) {
+
+                    Toast.makeText(context, "NetworkError", Toast.LENGTH_LONG).show();
+                    //TODO
+                } else if (error instanceof ParseError) {
+                    //TODO
+                    Toast.makeText(context, "ParseError", Toast.LENGTH_LONG).show();
+                }
+            }
+        });
+        jsonObjReq.setRetryPolicy(new DefaultRetryPolicy(30000,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         AppController.getInstance().addToRequestQueue(jsonObjReq);
     }
 }

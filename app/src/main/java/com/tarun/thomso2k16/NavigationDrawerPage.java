@@ -110,8 +110,8 @@ public class NavigationDrawerPage extends AppCompatActivity {
     }
 
     public void teamsClicked(View view) {
-        Intent wvt = new Intent(NavigationDrawerPage.this, WebView.class);
-        wvt.putExtra("url", "http://thomso.in/about.html");
+        Intent wvt = new Intent(NavigationDrawerPage.this, TeamActivity.class);
+      //  wvt.putExtra("url", "http://thomso.in/about.html");
         startActivity(wvt);
         overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
     }
@@ -206,8 +206,7 @@ public class NavigationDrawerPage extends AppCompatActivity {
                                 overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
                                 break;
                             case 4:
-                                Intent wvt = new Intent(NavigationDrawerPage.this, WebView.class);
-                                wvt.putExtra("url", "http://thomso.in/about.html");
+                                Intent wvt = new Intent(NavigationDrawerPage.this, TeamActivity.class);
                                 startActivity(wvt);
                                 overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
                                 break;

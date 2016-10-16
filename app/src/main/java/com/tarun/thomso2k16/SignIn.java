@@ -73,10 +73,10 @@ public class SignIn extends AppCompatActivity {
         mPassword = password.getText().toString();
         mUsername = userName.getText().toString();
         if (mUsername.length() == 0) {
-            erroredit(userName, "Username can't be empty");
+            erroredit(userName, "Email can't be empty");
         } else {
             if (mPassword.length() == 0) {
-                erroredit(password, "Password can't be empty");
+                erroredit(password, "Thomso ID can't be empty");
             } else {
                 LoginAsyncTask async_Event_Post = new LoginAsyncTask();
                 async_Event_Post.execute("http://www.thomso.in/app/Login.php");
@@ -124,8 +124,8 @@ public class SignIn extends AppCompatActivity {
 
                 List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(1);
 
-                nameValuePairs.add(new BasicNameValuePair("thomsoid", mUsername));
-                nameValuePairs.add(new BasicNameValuePair("emailid", mPassword));
+                nameValuePairs.add(new BasicNameValuePair("emailid", mUsername));
+                nameValuePairs.add(new BasicNameValuePair("thomsoid", mPassword));
                 httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
                 HttpResponse response = httpclient.execute(httppost);
                 HttpEntity entity = response.getEntity();

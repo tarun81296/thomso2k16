@@ -30,6 +30,11 @@ public class DBhelper extends SQLiteOpenHelper {
     private static final String COLUMN_CoordinatorName2 = "CoordinatorName2";
     private static final String COLUMN_CoordinatorNumber1 = "CoordinatorNumber1";
     private static final String COLUMN_CoordinatorNumber2 = "CoordinatorNumber2";
+    private static final String TABLE_TEAM="TEAM_DETAILS";
+    private static final String COLUMN_Teamid = "_id";
+    private static final String COLUMN_NAME="name";
+    private static final String COLUMN_NUMBER="number";
+    private static final String COLUMN_POST="post";
     public int p = 0;
 
     public DBhelper(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
@@ -42,12 +47,16 @@ public class DBhelper extends SQLiteOpenHelper {
                 + COLUMN_EventDescription + " TEXT," + COLUMN_EventDate + " TEXT," + COLUMN_EventTime + " TEXT," + COLUMN_EventVenue + " TEXT,"
                 + COLUMN_EventDay + " TEXT," + COLUMN_EventImage + " TEXT," + COLUMN_CoordinatorName1 + " TEXT," + COLUMN_CoordinatorNumber1 + " TEXT," + COLUMN_CoordinatorName2 +
                 " TEXT," + COLUMN_CoordinatorNumber2 + " TEXT " + ");";
+        String teamQuery= "CREATE TABLE "+TABLE_TEAM+ "( "+COLUMN_Teamid+" INTEGER PRIMARY KEY AUTOINCREMENT," + COLUMN_NAME +" TEXT,"
+                + COLUMN_NUMBER + " TEXT,"+ COLUMN_POST+" TEXT "+" )";
+        db.execSQL(teamQuery);
         db.execSQL(query);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_EVENTS);
+        db.execSQL("DROP TABLE IF EXISTS"+TABLE_TEAM);
         onCreate(db);
     }
 
@@ -68,6 +77,15 @@ public class DBhelper extends SQLiteOpenHelper {
         db.insert(TABLE_EVENTS, null, values);
         db.close();
     }
+    public void getTeamInput(TeamPojo tp){
+        ContentValues values= new ContentValues();
+        values.put(COLUMN_NAME,tp.getName());
+        values.put(COLUMN_NUMBER,tp.getNumber());
+        values.put(COLUMN_POST,tp.getPost());
+        SQLiteDatabase db= getWritableDatabase();
+        db.insert(TABLE_TEAM,null,values);
+        db.close();
+    }
 
     public int getEventsCount(String query) {
         String countQuery = query;
@@ -76,7 +94,13 @@ public class DBhelper extends SQLiteOpenHelper {
         // return count
         return cursor.getCount();
     }
-
+    public int getTeamCount( ) {
+        String countQuery = "SELECT * FROM "+TABLE_TEAM+" ;";
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(countQuery, null);
+        // return count
+        return cursor.getCount();
+    }
     public List<Events_pojo> showEvents(String query) {
         List<Events_pojo> events = new ArrayList<Events_pojo>();
         String selectQuery = query;
@@ -106,7 +130,26 @@ public class DBhelper extends SQLiteOpenHelper {
         db.close();
         return events;
     }
+public List<TeamPojo> getTeam(){
+    String query= "SELECT * FROM "+TABLE_TEAM+" ;";
+    List<TeamPojo> team= new ArrayList<>();
+    SQLiteDatabase db = this.getWritableDatabase();
+    Cursor cursor = db.rawQuery(query,null);
+    cursor.moveToFirst();
+    do{
+        try{
+            TeamPojo tp =new TeamPojo();
+            tp.setName(cursor.getString(1));
+            tp.setNumber(cursor.getString(2));
+            tp.setPost(cursor.getString(3));
+            team.add(tp);
+        }catch(Exception e){
 
+        }
+    }while(cursor.moveToNext());
+    db.close();
+    return team;
+}
     public Events_pojo getEventDetails(String EventName) {
         String query = "SELECT * FROM " + TABLE_EVENTS + " WHERE " + COLUMN_EventName + " =\"" + EventName + "\" ;";
         Log.e("query", " " + query);

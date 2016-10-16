@@ -47,8 +47,10 @@
         <activity
             android:name=".UserDetails"
             android:screenOrientation="portrait" />
-        <activity android:name=".MapActivity"
-            android:screenOrientation="portrait"></activity>
+        <activity
+            android:name=".MapActivity"
+            android:screenOrientation="portrait" />
+        <activity android:name=".TeamActivity"></activity>
     </application>
 
 </manifest>
