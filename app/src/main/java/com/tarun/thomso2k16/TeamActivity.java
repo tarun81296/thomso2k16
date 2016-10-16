@@ -82,4 +82,12 @@ public class TeamActivity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
+
+    @Override
+    public void onBackPressed() {
+        Intent i = new Intent(TeamActivity.this, NavigationDrawerPage.class);
+        startActivity(i);
+        finish();
+        super.onBackPressed();
+    }
 }

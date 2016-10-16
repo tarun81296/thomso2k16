@@ -63,6 +63,10 @@ public class WebView extends AppCompatActivity {
             webview.goBack();
         } else {
             // Let the system handle the back button
+
+                Intent i = new Intent(WebView.this, NavigationDrawerPage.class);
+                startActivity(i);
+                finish();
             super.onBackPressed();
         }
     }

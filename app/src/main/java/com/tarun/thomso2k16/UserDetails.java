@@ -6,6 +6,7 @@ import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -30,6 +31,8 @@ public class UserDetails extends AppCompatActivity {
     String image,sqrcode;
     SessionManager sm;
     HashMap<String,String> userDetails;
+    private TextView registerqr;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,6 +43,7 @@ public class UserDetails extends AppCompatActivity {
         name = (TextView)findViewById(R.id.name_user_details);
         thomso_id=(TextView)findViewById(R.id.thomsoid_user_details);
         college=(TextView)findViewById(R.id.college_user_details);
+        registerqr=(TextView)findViewById(R.id.register_with_qr_code);
         sm = new SessionManager(context);
         userDetails=sm.getUserDetails();
         name.setText(userDetails.get(SessionManager.KEY_NAME));
@@ -54,16 +58,22 @@ public class UserDetails extends AppCompatActivity {
     }
 
     private void generateQRCode(String sqrcode) {
-        QRCodeEncoder qrCodeEncoder = new QRCodeEncoder(sqrcode,
-                null,
-                Contents.Type.TEXT,
-                BarcodeFormat.QR_CODE.toString(),
-                150);
-        try {
-            Bitmap bitmap = qrCodeEncoder.encodeAsBitmap();
-            qrcode.setImageBitmap(bitmap);
-        } catch (WriterException e) {
-            e.printStackTrace();
+        if(!sqrcode.equalsIgnoreCase("0")) {
+            QRCodeEncoder qrCodeEncoder = new QRCodeEncoder(sqrcode,
+                    null,
+                    Contents.Type.TEXT,
+                    BarcodeFormat.QR_CODE.toString(),
+                    150);
+            try {
+                Bitmap bitmap = qrCodeEncoder.encodeAsBitmap();
+                qrcode.setImageBitmap(bitmap);
+            } catch (WriterException e) {
+                e.printStackTrace();
+            }
+        }
+        else{
+            qrcode.setVisibility(View.GONE);
+            registerqr.setVisibility(View.VISIBLE);
         }
     }
 
@@ -77,5 +87,12 @@ public class UserDetails extends AppCompatActivity {
                 return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+    @Override
+    public void onBackPressed() {
+        Intent i = new Intent(UserDetails.this, NavigationDrawerPage.class);
+        startActivity(i);
+        finish();
+        super.onBackPressed();
     }
 }

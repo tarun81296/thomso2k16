@@ -99,6 +99,7 @@ public class SignIn extends AppCompatActivity {
         Intent i = new Intent(SignIn.this, NavigationDrawerPage.class);
         startActivity(i);
         finish();
+        finish();
     }
 
     class LoginAsyncTask extends AsyncTask<String, Void, Boolean> {

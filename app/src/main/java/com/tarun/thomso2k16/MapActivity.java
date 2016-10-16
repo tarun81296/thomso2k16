@@ -8,6 +8,8 @@ import android.view.MenuItem;
 import com.davemorrissey.labs.subscaleview.ImageSource;
 import com.davemorrissey.labs.subscaleview.SubsamplingScaleImageView;
 
+import java.util.Map;
+
 public class MapActivity extends AppCompatActivity {
 
     @Override
@@ -30,5 +32,12 @@ public class MapActivity extends AppCompatActivity {
                 return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+    @Override
+    public void onBackPressed() {
+        Intent i = new Intent(MapActivity.this, NavigationDrawerPage.class);
+        startActivity(i);
+        finish();
+        super.onBackPressed();
     }
 }

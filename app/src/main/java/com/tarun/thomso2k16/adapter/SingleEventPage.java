@@ -164,9 +164,6 @@ public class SingleEventPage extends AppCompatActivity {
         Log.e("eTime ", eTime);
         String eImage1=eImage.split("/")[4];
         Log.e("eImage1",eImage1.replace(".",",").split(",")[0]);
-        if(eName.equalsIgnoreCase("16frames")){
-            eImage="a"+eImage1;
-        }
         drawable = getResources().getDrawable(getResources().getIdentifier(eImage1.replace(".",",").split(",")[0],"drawable",getPackageName()));
         Log.e("drawable",drawable.toString());
         setData();

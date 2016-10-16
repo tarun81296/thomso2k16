@@ -14,6 +14,6 @@
     android:layout_height="wrap_content"
     android:layout_centerHorizontal="true"
     android:layout_centerVertical="true"
-    android:text="No recent events"
+    android:text="No on going events"
     android:textSize="30dp"/>
 </RelativeLayout>
