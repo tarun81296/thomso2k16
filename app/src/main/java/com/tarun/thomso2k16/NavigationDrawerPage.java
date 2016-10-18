@@ -137,6 +137,7 @@ public class NavigationDrawerPage extends ActionBarActivity {
     public void loginClicked(View view) {
         if (session.isLoggedIn()) {
             session.logoutUser();
+            finish();
             recreate();
 
         } else {
@@ -245,6 +246,7 @@ public class NavigationDrawerPage extends ActionBarActivity {
                                 if (session.isLoggedIn()) {
                                     session.logoutUser();
                                     recreate();
+                                    finish();
                                     break;
                                 } else {
                                     Intent i1 = new Intent(context, SignIn.class);

@@ -1,6 +1,7 @@
 package com.tarun.thomso2k16.adapter;
 
 import android.content.Context;
+import android.graphics.Typeface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -53,6 +54,8 @@ public class EventsListAdapter extends BaseAdapter {
         tv_eventName = (TextView) eventView.findViewById(R.id.event_name);
         tv_eventVenue = (TextView) eventView.findViewById(R.id.event_venue);
         tv_eventTime = (TextView) eventView.findViewById(R.id.event_time);
+      //  Typeface typeFace= Typeface.createFromAsset(context.getAssets(),"fonts/lucida.ttf");
+       // tv_eventName.setTypeface(typeFace);
         tv_eventName.setText(title[position]);
         tv_eventVenue.setText(venue[position]);
         tv_eventTime.setText(time[position]);

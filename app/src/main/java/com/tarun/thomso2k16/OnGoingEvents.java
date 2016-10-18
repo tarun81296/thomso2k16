@@ -68,6 +68,7 @@ public class OnGoingEvents extends Fragment {
             // noRecentEvents();
             Intent i = new Intent(getActivity(), EmptyOnGoingEvents.class);
             startActivity(i);
+            getActivity().finish();
         }
 
         String[] tar = new String[n];

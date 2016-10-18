@@ -99,13 +99,13 @@ public class SignIn extends AppCompatActivity {
         Intent i = new Intent(SignIn.this, NavigationDrawerPage.class);
         startActivity(i);
         finish();
-        finish();
     }
 
     class LoginAsyncTask extends AsyncTask<String, Void, Boolean> {
 
         String msg = "", response_status = "", name = "", college = "", thomsoid = "", image = "",qrcodevalue="";
         int status;
+
         String Response = null;
 
         @Override
@@ -170,12 +170,14 @@ public class SignIn extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(Boolean result) {
-            pb.setVisibility(View.GONE);
+            pb.setVisibility(View.INVISIBLE);
             if (response_status.equalsIgnoreCase("1")) {
                 sm.createLoginSession(name, college, thomsoid, qrcodevalue, image);
                 sm.createUserImagesession(image);
                 Intent i = new Intent(SignIn.this, NavigationDrawerPage.class);
                 startActivity(i);
+                finish();
+
             } else if (response_status.equalsIgnoreCase("0")) {
                 Toast.makeText(SignIn.this, "Invalid Details!!", Toast.LENGTH_LONG).show();
             }

@@ -82,21 +82,7 @@ public class SplashPage extends AppCompatActivity {
                         }
                     },1500);
                 }
-                if (session.isLoggedIn()) {
-//					Random r = new Random(System.currentTimeMillis());
-//					commonsession.createcommonidSession(android_id);
 
-                   /* Intent i = new Intent(SplashPage.this, NavigationDrawerPage.class);
-                    startActivity(i);
-                    finish();*/
-                    //  overridePendingTransition(R.anim.enter,R.anim.exit);
-                } else {
-                    HashMap<String, String> user1 = commonsession.getUserDetails();
-                    //CommonId = user1.get(CommonIDSessionManager.KEY_COMMONID);
-                    if (!user1.containsKey(CommonIdSessionManager.KEY_COMMONID) || user1.get(CommonIdSessionManager.KEY_COMMONID) == null || user1.get(CommonIdSessionManager.KEY_COMMONID).equalsIgnoreCase("commonid")) {
-                        Random r = new Random(System.currentTimeMillis());
-                        commonsession.createcommonidSession(android_id);
-                    }
 
 
                     Intent i = new Intent(SplashPage.this, NavigationDrawerPage.class);
@@ -104,7 +90,7 @@ public class SplashPage extends AppCompatActivity {
                     finish();
                     // overridePendingTransition(R.anim.enter,R.anim.exit);
                 }
-            }
+
         }, SPLASH_TIME_OUT);
         isInternetPresent = cic.isConnectingToInternet();
         if (isInternetPresent) {
@@ -220,8 +206,9 @@ public class SplashPage extends AppCompatActivity {
                             event1.setCoordinatorNo2(object1.getString("Coordinator Number2"));
                             dbh.getInput(event1);
                         }
+                        session.dataEntered();
                     }
-                    session.dataEntered();
+
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }

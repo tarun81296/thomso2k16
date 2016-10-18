@@ -19,7 +19,7 @@ public class EmptyOnGoingEvents extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
-                Intent i = new Intent(EmptyOnGoingEvents.this, NavigationDrawerPage.class);
+                Intent i = new Intent (EmptyOnGoingEvents.this,NavigationDrawerPage.class);
                 startActivity(i);
                 finish();
                 return true;
@@ -29,7 +29,7 @@ public class EmptyOnGoingEvents extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        Intent i = new Intent(EmptyOnGoingEvents.this, NavigationDrawerPage.class);
+        Intent i = new Intent (EmptyOnGoingEvents.this,NavigationDrawerPage.class);
         startActivity(i);
         finish();
 
