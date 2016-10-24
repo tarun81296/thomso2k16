@@ -3,6 +3,7 @@ package com.tarun.thomso2k16;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -11,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.tarun.thomso2k16.adapter.EventsListAdapter;
 import com.tarun.thomso2k16.adapter.SingleEventPage;
@@ -77,6 +79,16 @@ public class EventsDay0 extends Fragment {
 
         List<Events_pojo> event = dbh.showEvents("SELECT * FROM " + TABLE_EVENTS + " WHERE " + COLUMN_EventDay + " ='0' " + " ;");
         int n = dbh.getEventsCount("SELECT * FROM " + TABLE_EVENTS + " WHERE " + COLUMN_EventDay + " ='0' " + " ;");
+        if(n==0){
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+
+Toast.makeText(context,"Please connect to working internet and restart the app",Toast.LENGTH_LONG).show();
+                }
+            }, 2000);
+            getActivity().finish();
+        }
         String[] tar = new String[n];
         String[] venue = new String[n];
         String[] time = new String[n];

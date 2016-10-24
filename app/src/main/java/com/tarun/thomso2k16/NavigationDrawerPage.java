@@ -15,11 +15,15 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.Choreographer;
 import android.view.Gravity;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
@@ -45,6 +49,7 @@ public class NavigationDrawerPage extends ActionBarActivity {
     private Context context;
     private SessionManager session;
     private SliderLayout sliderShow;
+    private FrameLayout mainFrame;
 
     public static void closeDrawers() {
         if (mDrawerLayout != null && mDrawerLayout.isDrawerOpen(mDrawer)) {
@@ -61,6 +66,7 @@ public class NavigationDrawerPage extends ActionBarActivity {
         sliderShow = (SliderLayout) findViewById(R.id.slider);
         login = (ImageButton) findViewById(R.id.login);
         logout = (ImageButton) findViewById(R.id.logout);
+        mainFrame = (FrameLayout)findViewById(R.id.content_frame);
         context = getApplicationContext();
         cic= new CheckInternetConnection(context);
         session = new SessionManager(context);
@@ -107,6 +113,7 @@ public class NavigationDrawerPage extends ActionBarActivity {
                 .beginTransaction();
         Fragment recentEvents = new OnGoingEvents();
         ft.replace(R.id.content_frame, recentEvents);
+        selectedfragment=2;
         overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
         ft.commit();
     }
@@ -190,7 +197,7 @@ public class NavigationDrawerPage extends ActionBarActivity {
                     public void onItemClick(AdapterView<?> parent, View view,
                                             int position, long id) {
 
-                        selectedfragment = position;
+
                         //  isBackPress = false;
                         FragmentTransaction ft = getSupportFragmentManager()
                                 .beginTransaction();
@@ -218,6 +225,7 @@ public class NavigationDrawerPage extends ActionBarActivity {
                             case 2:
                                 Fragment recentEvents = new OnGoingEvents();
                                 ft.replace(R.id.content_frame, recentEvents);
+                                selectedfragment=2;
                                 overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
                                 break;
                             case 4:
@@ -263,10 +271,7 @@ public class NavigationDrawerPage extends ActionBarActivity {
                         // ft.detach(mFragment);
 
                         ft.commit();
-                        if (selectedfragment != 1) {
-                            setSelectedItem(position, (TextView) view.findViewById(R.id.title));
-                            mDrawerList.setItemChecked(position, true);
-                        }
+
                         mDrawerLayout.closeDrawer(mDrawer);
 
                     }
@@ -314,6 +319,12 @@ public class NavigationDrawerPage extends ActionBarActivity {
         // Sync the toggle state after onRestoreInstanceState has occurred.
         mDrawerToggle.syncState();
     }
+    public boolean onCreateOptionsMenu(Menu menu) {
+
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_credits, menu);
+        return true;
+    }
 
     @Override
     public void onBackPressed() {
@@ -321,18 +332,7 @@ public class NavigationDrawerPage extends ActionBarActivity {
             mDrawerLayout.closeDrawers();
             return;
         }
-        if (selectedfragment != 1) {
-            selectedfragment = 1;
 
-            NavigationDrawerPage.mSelectedItem_text_pos = 1;
-            //   Fragment fragment = new HomePage();
-            FragmentManager fragmentManager = getSupportFragmentManager();
-            FragmentTransaction ft = fragmentManager.beginTransaction();
-            //   ft.replace(R.id.content_frame, fragment);
-            ft.commit();
-            //   mDrawerList.setAdapter(mMenuAdapter);
-            //   mMenuAdapter.notifyDataSetChanged();
-        } else {
             //   if (isBackPress) {
             AlertDialog.Builder dialog = new AlertDialog.Builder(this);
             dialog.setTitle("Exit");
@@ -350,7 +350,7 @@ public class NavigationDrawerPage extends ActionBarActivity {
                 }
             });
             dialog.show();
-        }//// else {
+        //// else {
         //    isBackPress = true;
         /// }
     }
@@ -372,9 +372,15 @@ public class NavigationDrawerPage extends ActionBarActivity {
                 }
 
                 return true;
+            case R.id.credits:
+                Intent i = new Intent(NavigationDrawerPage.this,CreditsPage.class);
+                startActivity(i);
+                finish();
+                return true;
 
         }
         return super.onOptionsItemSelected(item);
     }
+
 }
 
